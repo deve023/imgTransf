@@ -19,7 +19,7 @@ main.o: main.cpp Imagen.h comando.h
 	$(CXX) $(CXXFLAGS) -c main.cpp
 
 tp1: main.o Pixel.o Imagen.o Complejo.o comando.o
-	$(CXX) $(CXXFLAGS) $^ -o tp0
+	$(CXX) $(CXXFLAGS) $^ -o tp1
 
 clean:
 	rm *.o

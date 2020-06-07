@@ -1,7 +1,7 @@
-#ifndef COMPLEJO_INCLUDED_
-#define COMPLEJO_INCLUDED_
+#ifndef _COMPLEJO_INCLUDED_
+#define _COMPLEJO_INCLUDED_
 
-using namespace std;
+#include <iostream>
 
 class Complejo
 {
@@ -11,22 +11,44 @@ private:
 	double imag;
 
 public:
-	Complejo():real(0.0),imag(0.0){};
-	Complejo(double r, double i):real(r),imag(i){};
-	Complejo(const Complejo &c):real(c.real),imag(c.imag){};
-	~Complejo(){};
+	Complejo();
+	Complejo(double, double);
+	Complejo(const Complejo &);
+	~Complejo();
 
 	double getReal() const;
 	double getImag() const;
 	void setReal(double);
 	void setImag(double);
 
+	double modulo() const;
+	double arg() const;
+	Complejo conjugar() const;
+
+	Complejo exp() const;
+	Complejo ln() const;
+
+	Complejo pot(int) const;
+
 	const Complejo& operator = (const Complejo &);
+
+	Complejo operator + (Complejo const &) const;
+	Complejo operator + (double) const;
+	Complejo operator - (Complejo const &) const;
+	Complejo operator - (double) const;
+	Complejo operator * (Complejo const &) const;
 	Complejo operator * (double) const;
+	Complejo operator / (Complejo const &) const;
+	Complejo operator / (double) const;
 
-	// FALTAN  operators
-
+	friend Complejo operator + (double, Complejo const &);
+	friend Complejo operator - (double, Complejo const &);
+	friend Complejo operator * (double, Complejo const &);
+	friend Complejo operator / (double, Complejo const &);
+	
+	friend std::ostream & operator << (std::ostream &, const Complejo &);
+	
 };
 
 
-#endif // COMPLEJO_INCLUDED_
+#endif // _COMPLEJO_INCLUDED_

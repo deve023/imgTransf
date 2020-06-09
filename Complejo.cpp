@@ -39,28 +39,34 @@ void Complejo::setImag(double i)
 
 double Complejo::modulo() const
 {
-	return std::sqrt(this->real * this->real + this->imag * this->imag);
+	return sqrt(this->real * this->real + this->imag * this->imag);
 }
 
 double Complejo::arg() const
 {
 	if(this->imag == 0)
+	{
 		if(this->real < 0)
 			return PI;
 		else
 			return 0; // Si se trata del complejo (0,0) se devolvera 0.
+	}
 
 	if(this->real == 0)
+	{	
 		if(this->imag > 0)
 			return PI/2;
 		else
 			return 3*PI/2;
+	}
 
 	if(this->real > 0)
+	{	
 		if(this->imag > 0)
 			return std::atan(this->imag / this->real); // Cuadrante I
 		else
 			return 2*PI - std::atan(-this->imag / this->real); // Cuadrante IV
+	}
 	if(this->imag > 0)
 		return PI/2 + std::atan(-this->real / this->imag); // Cuadrante II
 	return PI + std::atan(-this->imag / (-this->real)); // Cuadrante III

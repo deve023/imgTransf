@@ -39,4 +39,6 @@ class token
 
 };
 
+lista<token> strtolist(string str);
+
 #endif //_TOKEN_H_

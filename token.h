@@ -24,8 +24,9 @@ class token
     public:
     	token();
     	token(token_type_t, string, Complejo); // Constructor para NUMBER
-    	token(token_type_t, string); // Constructor para FUNCTION, LPAR, RPAR, J y Z
+    	token(token_type_t, string); // Constructor para FUNCTION
     	token(token_type_t, string, int, bool); // Constructor para OPERATOR
+        token(token_type_t); // Constructor para LPAR, RPAR, Z y J
     	
     	token_type_t getType() const;
 

@@ -21,6 +21,8 @@ class cola
         token desencolar();
         token frente();
         bool vacia();
+
+        bool strtocola(string);
 };
 
 #endif //_COLA_H_

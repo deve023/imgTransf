@@ -4,6 +4,7 @@
 #include "Complejo.h"
 #include "lista.h"
 
+#include <string>
 #include <iostream>
 
 using namespace std;
@@ -16,14 +17,18 @@ class token
     private:
         token_type_t type_;
         string value_;
-        //Complejo complejo_;
-        //int precedence_;
-        //bool l_assoc_;
+        Complejo complejo_; // Si no se trata de un NUMBER, sera el 0+0i. Si es z tambien se le asigna ese valor nulo.
+        int precedence_; // Si no se trata de un OPERATOR, sera 5.
+        bool l_assoc_; // Si no se trata de un OPERATOR sera falso
         
     public:
     	token();
-    	token(token_type_t, string);
+    	token(token_type_t, string, Complejo); // Constructor para NUMBER
+    	token(token_type_t, string); // Constructor para FUNCTION, LPAR, RPAR, J y Z
+    	token(token_type_t, string, int, bool); // Constructor para OPERATOR
     	
+    	token_type_t getType() const;
+
 		bool is_function() const;
 		bool is_lpar() const;
 		bool is_rpar() const;

@@ -87,10 +87,10 @@ bool Imagen::setPixeles(int **intensidadPixeles, int sx, int sy)
 	double distY = 2.0 / (sy - 1);
 
 	this->pixeles = new Pixel*[this->sizeY];
-	for(int i = 0; i < this->sizeY; i++)
+	for(size_t i = 0; i < this->sizeY; i++)
 	{
 		this->pixeles[i] = new Pixel[this->sizeX];
-		for(int j = 0; j < this->sizeX; j++)
+		for(size_t j = 0; j < this->sizeX; j++)
 		{
 			int intensidad = intensidadPixeles[i][j];
 
@@ -135,10 +135,10 @@ int **Imagen::getIntensidadPixeles() const
 		return NULL;
 
 	int **intensidadPixeles = new int*[this->sizeY];
-	for(int i = 0; i < this->sizeY; i++)
+	for(size_t i = 0; i < this->sizeY; i++)
 	{
 		intensidadPixeles[i] = new int[this->sizeX];
-		for(int j = 0; j < this->sizeX; j++)
+		for(size_t j = 0; j < this->sizeX; j++)
 			intensidadPixeles[i][j] = this->pixeles[i][j].getIntensidad();
 	}
 	return intensidadPixeles;
@@ -281,7 +281,7 @@ void Imagen::escribirArchivoPgm(ostream *oss) const
 	<< this->sizeX << " " << this->sizeY << endl
 	<< this->intensidadMax << endl;
 
-	int i, j;
+	size_t i, j;
 	for(i = 0; i < this->sizeY; i++)
 	{
 		for(j = 0; j < this->sizeX - 1; j++)

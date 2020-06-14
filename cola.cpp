@@ -26,7 +26,7 @@ token cola::desencolar()
 {
     if(vacia())
         return token();
-    token& t = lista_.primero();
+    token t = lista_.primero();
     lista_.borrar(0);
     tam_--;
     return t;

@@ -38,8 +38,8 @@ class token
 		bool is_j() const;
 		bool is_z() const;
 		bool is_l_assoc() const;
-		int precedence() const;
-		Complejo complex() const;
+		int getPrecedence() const;
+		Complejo getComplex() const;
 		
 		friend ostream & operator<<(ostream &, const token &);
 

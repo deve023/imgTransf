@@ -92,12 +92,12 @@ bool token::is_l_assoc() const
 	return l_assoc_;
 }
 
-int token::precedence() const
+int token::getPrecedence() const
 {
 	return this->precedence_;
 }
 
-Complejo token::complex() const
+Complejo token::getComplex() const
 {
 	return this->complejo_;
 }

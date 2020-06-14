@@ -63,6 +63,8 @@ class lista
         void borrar(size_t); //borra el i-esimo nodo
         void swap_primeros2(); //intercambia los primeros dos elementos
         void imprimir() const;
+
+        const lista<T> & operator = (const lista<T> &);
     
 };
 
@@ -307,6 +309,41 @@ void lista<T>::imprimir() const
         std::cout<<"lista vacia";
     }
     std::cout<<std::endl;
+}
+
+template<typename T>
+const lista<T> & lista<T>::operator = (const lista<T> &orig)
+{
+    // Primero se vacia la lista;
+    for (nodo* p = pri_; p; )
+    {
+        nodo* q = p->sig_;
+        delete p;
+        p = q;
+    }
+
+    pri_ = 0;
+    ult_ = 0;
+    tam_ = orig.tam_;
+
+    nodo* iter = orig.pri_;
+    nodo* ant = 0;
+
+    while(iter)
+    {
+        nodo* nuevo = new nodo(iter->dato_);
+        nuevo->ant_ = ant;
+        nuevo->sig_ = 0;
+        if (ant != 0)
+            ant->sig_ = nuevo;
+        if (pri_ == 0)
+            pri_ = nuevo;
+        ant = nuevo;
+        iter=iter->sig_;
+    }
+    ult_ = ant;
+
+    return *this;
 }
 
 #endif //_LISTA_H_

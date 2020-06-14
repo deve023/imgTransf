@@ -9,10 +9,10 @@ cola shunting_yard(cola);
 
 int main()
 {
-    cola cInfix;
+    cola cInfix, cRPN;
 
     cInfix.strtocola("3+ 5 / 2");
-    cola cRPN = shunting_yard(cInfix);
+    cRPN = shunting_yard(cInfix);
 
     while(!cRPN.vacia())
         cout << cRPN.desencolar() << " ";

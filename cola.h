@@ -22,6 +22,8 @@ class cola
         token frente();
         bool vacia();
 
+        const cola & operator = (const cola &);
+
         void strtocola(string);
 };
 

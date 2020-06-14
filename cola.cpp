@@ -47,6 +47,17 @@ bool cola::vacia()
     return lista_.vacia();
 }
 
+const cola & cola::operator = (const cola &c)
+{
+	while(!this->vacia())
+		this->desencolar();
+
+	this->lista_ = c.lista_;
+	this->tam_ = c.tam_;
+
+	return *this;
+}
+
 void cola::strtocola(string str)
 {
     // Primero se vacia la cola

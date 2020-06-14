@@ -52,7 +52,7 @@ token_type_t token::getType() const
 	return this->type_;
 }
 
-string getValue() const
+string token::getValue() const
 {
 	return this->value_;
 }

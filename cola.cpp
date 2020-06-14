@@ -47,7 +47,7 @@ bool cola::vacia()
     return lista_.vacia();
 }
 
-bool cola::strtocola(string str)
+void cola::strtocola(string str)
 {
     // Primero se vacia la cola
     while(!this->vacia())
@@ -104,6 +104,4 @@ bool cola::strtocola(string str)
                 break;
         }
     }
-
-    return true;
 }

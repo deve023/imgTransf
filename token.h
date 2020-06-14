@@ -29,6 +29,9 @@ class token
         token(token_type_t); // Constructor para LPAR, RPAR, Z y J
     	
     	token_type_t getType() const;
+        string getValue() const;
+		int getPrecedence() const;
+		Complejo getComplex() const;
 
 		bool is_function() const;
 		bool is_lpar() const;
@@ -38,8 +41,6 @@ class token
 		bool is_j() const;
 		bool is_z() const;
 		bool is_l_assoc() const;
-		int getPrecedence() const;
-		Complejo getComplex() const;
 		
 		friend ostream & operator<<(ostream &, const token &);
 

@@ -52,6 +52,11 @@ token_type_t token::getType() const
 	return this->type_;
 }
 
+string getValue() const
+{
+	return this->value_;
+}
+
 bool token::is_function() const
 {
 	return this->type_ == FUNCTION;

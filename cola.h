@@ -22,7 +22,7 @@ class cola
         token frente();
         bool vacia();
 
-        bool strtocola(string);
+        void strtocola(string);
 };
 
 #endif //_COLA_H_

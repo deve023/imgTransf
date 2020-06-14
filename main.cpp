@@ -65,13 +65,29 @@ static void opt_output(string const &arg)
 static void opt_function(string const &arg)
 {
 
-	function = arg;
+	string f;
 
 	// Funcion por defecto
-	if(!function.compare("-")) 
-		function = "z";
+	if(arg == "-") 
+		f = "z";
 	else
-		function = arg;
+		f = arg;
+
+	cola infix;
+	infix.strtocola(f)
+
+	if(!esValida(infix))
+	{
+		cerr << "La funcion no es valida." << endl;
+		exit(1);
+	}
+
+	function = shunting_yard(infix);
+	if(function.vacia())
+	{
+		cerr << "La funcion no es valida." << endl;
+		exit(1);
+	}
 }
 
 static void opt_help(string const &arg)
@@ -81,7 +97,8 @@ static void opt_help(string const &arg)
 	exit(0);
 }
 
-cola shunting_yard(cola &);
+cola shunting_yard(cola infix);
+bool esValida(cola c);
 
 int main(int argc, char * const argv[])
 {
@@ -106,4 +123,80 @@ int main(int argc, char * const argv[])
 	*/
 	
 	return 0;
+}
+
+cola shunting_yard(cola infix)
+{
+    cola output;
+    pila opPila;
+
+    while(!infix.vacia())
+    {
+        token t = infix.desencolar();
+        switch(t.getType())
+        {
+            case NUMBER:
+                output.encolar(t);
+                break;
+            case FUNCTION:
+                opPila.push(t);
+                break;
+            case OPERATOR:
+                while(!opPila.vacia())
+                {
+                    if(opPila.tope().getPrecedence() > t.getPrecedence() || (opPila.tope().getPrecedence() == t.getPrecedence() && t.is_l_assoc()))
+                        output.encolar(opPila.pop());
+                    else
+                    {
+                        opPila.push(t);
+                        break;
+                    }
+                }
+                if(opPila.vacia())
+                    opPila.push(t);
+                break;
+            case LPAR:
+                opPila.push(t);
+                break;
+            case RPAR:
+                while(!opPila.vacia() && !(opPila.tope().getType() == LPAR))
+                    output.encolar(opPila.pop());
+                if(opPila.vacia())
+                    return cola(); // error: la expresion esta desbalanceada. Devuelve Cola() por defecto.
+                opPila.pop(); // Descarta el LPAR que esta en la pila
+                break;
+            default:
+                return cola(); // Si no es de ninguno de estos tipos, hubo un error. Devuelve Cola() por defecto.
+        }
+    }
+
+    while(!opPila.vacia())
+        output.encolar(opPila.pop());
+
+    return output;
+}
+
+bool esValida(cola c)
+{
+	bool isZ = false;
+
+	while(!c.vacia())
+	{
+		token t = c.desacolar();
+		if(t.getType() == Z)
+		{
+			isZ = true;
+			continue;
+		}
+
+		if(t.getType() != FUNCTION)
+			continue;
+
+		string v = t.getValue();
+		if(v != "exp" && v != "ln" && v != "re" && v != "im" && v != "abs" && v != "phase")
+			return false;
+
+	}
+
+	return isZ;
 }

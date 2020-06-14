@@ -4,6 +4,9 @@
 
 #include "comando.h"
 #include "Imagen.h"
+#include "pila.h"
+#include "cola.h"
+#include "token.h"
 
 using namespace std;
 
@@ -25,6 +28,9 @@ static istream *iss = 0;
 static ostream *oss = 0;
 static fstream ifs;
 static fstream ofs;
+
+cola shunting_yard(cola infix);
+bool esValida(cola c);
 
 static void opt_input(string const &arg)
 {
@@ -74,7 +80,7 @@ static void opt_function(string const &arg)
 		f = arg;
 
 	cola infix;
-	infix.strtocola(f)
+	infix.strtocola(f);
 
 	if(!esValida(infix))
 	{
@@ -85,7 +91,7 @@ static void opt_function(string const &arg)
 	function = shunting_yard(infix);
 	if(function.vacia())
 	{
-		cerr << "La funcion no es valida." << endl;
+		cerr << "La funcion no es valida.." << endl;
 		exit(1);
 	}
 }
@@ -97,8 +103,6 @@ static void opt_help(string const &arg)
 	exit(0);
 }
 
-cola shunting_yard(cola infix);
-bool esValida(cola c);
 
 int main(int argc, char * const argv[])
 {
@@ -114,13 +118,10 @@ int main(int argc, char * const argv[])
 		return 1;
 	}
 
-	/*
-	// Se aplica la transformacion correspondiente
-	dest = orig.transformar(function);
+	dest = orig;
 
 	// Se escribe la imagen transformada
 	dest.escribirArchivoPgm(oss);
-	*/
 	
 	return 0;
 }
@@ -136,6 +137,8 @@ cola shunting_yard(cola infix)
         switch(t.getType())
         {
             case NUMBER:
+            case Z:
+            case J:
                 output.encolar(t);
                 break;
             case FUNCTION:
@@ -182,7 +185,7 @@ bool esValida(cola c)
 
 	while(!c.vacia())
 	{
-		token t = c.desacolar();
+		token t = c.desencolar();
 		if(t.getType() == Z)
 		{
 			isZ = true;

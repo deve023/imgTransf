@@ -91,14 +91,14 @@ static void opt_function(string const &arg)
 	function = shunting_yard(infix);
 	if(function.vacia())
 	{
-		cerr << "La funcion no es valida.." << endl;
+		cerr << "La funcion no es valida." << endl;
 		exit(1);
 	}
 }
 
 static void opt_help(string const &arg)
 {
-	cout << "tp0 [-f funcion] [-i archivo] [-o archivo]" << endl;
+	cout << "tp0 [-f funcion] [-i archivo] [-o archivo]." << endl;
 
 	exit(0);
 }
@@ -114,7 +114,7 @@ int main(int argc, char * const argv[])
 	// Leo imagen 
 	if(!orig.leerArchivoPgm(iss))
 	{
-		cout << "Error al leer imagen" << endl;
+		cout << "Error al leer imagen." << endl;
 		return 1;
 	}
 
@@ -147,6 +147,12 @@ cola shunting_yard(cola infix)
             case OPERATOR:
                 while(!opPila.vacia())
                 {
+                	if(opPila.tope().getType() == LPAR)
+                	{
+                		opPila.push(t);
+                		break;
+                	}
+                	
                     if(opPila.tope().getPrecedence() > t.getPrecedence() || (opPila.tope().getPrecedence() == t.getPrecedence() && t.is_l_assoc()))
                         output.encolar(opPila.pop());
                     else

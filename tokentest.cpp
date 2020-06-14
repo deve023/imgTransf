@@ -11,7 +11,7 @@ int main()
 {
     cola cInfix, cRPN;
 
-    cInfix.strtocola("3+ 5 / 2");
+    cInfix.strtocola("(3*6 - (5*8 + 3) + 5) / 2");
     cRPN = shunting_yard(cInfix);
 
     while(!cRPN.vacia())
@@ -41,7 +41,7 @@ int main()
     lista<token> l10 = strtolist("%$&*^@");
     l10.imprimir();
     */
-
+/*
     cola c1;
     c1.strtocola("phase((25+j*3)^z)");
     while(!c1.vacia())
@@ -87,7 +87,8 @@ int main()
     while(!c1.vacia())
         cout << c1.desencolar() << " ";
     cout << endl;
-/*
+*/
+    /*
     pila p1;
     p1.push(token(FUNCTION, "jeje"));
     cout<<p1.pop()<<endl;
@@ -111,6 +112,8 @@ cola shunting_yard(cola infix)
         switch(t.getType())
         {
             case NUMBER:
+            case Z:
+            case J:
                 output.encolar(t);
                 break;
             case FUNCTION:
@@ -119,6 +122,11 @@ cola shunting_yard(cola infix)
             case OPERATOR:
                 while(!opPila.vacia())
                 {
+                    if(opPila.tope().getType() == LPAR)
+                    {
+                        opPila.push(t);
+                        break;
+                    }
                     if(opPila.tope().getPrecedence() > t.getPrecedence() || (opPila.tope().getPrecedence() == t.getPrecedence() && t.is_l_assoc()))
                         output.encolar(opPila.pop());
                     else

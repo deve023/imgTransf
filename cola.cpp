@@ -35,6 +35,9 @@ token cola::desencolar()
 
 token cola::frente()
 {
+    if(vacia())
+        return token();
+
     return lista_.primero();
 }
 

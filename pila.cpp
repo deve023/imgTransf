@@ -36,6 +36,8 @@ token pila::pop()
 
 token pila::tope()
 {
+    if(vacia())
+        return token();
     return lista_.primero();
 }
 

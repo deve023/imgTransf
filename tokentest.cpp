@@ -9,15 +9,15 @@ cola shunting_yard(cola);
 
 int main()
 {
-/*
-    cola cInfix, cRPN;
+    cola cInfix;
 
     cInfix.strtocola("3+ 5 / 2");
-    cRPN = shunting_yard(cInfix);
+    cola cRPN = shunting_yard(cInfix);
 
     while(!cRPN.vacia())
         cout << cRPN.desencolar() << " ";
     cout << endl;
+/*
 
     
     lista<token> l1 = strtolist("phase((25+j*3)^z)");

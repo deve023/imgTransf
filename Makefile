@@ -24,7 +24,7 @@ Imagen.o: Imagen.cpp Imagen.h Pixel.h Complejo.h
 comando.o: comando.cpp comando.h
 	$(CXX) $(CXXFLAGS) -c comando.cpp
 
-main.o: main.cpp Imagen.h comando.h
+main.o: main.cpp Imagen.h comando.h pila.h cola.h token.h
 	$(CXX) $(CXXFLAGS) -c main.cpp
 
 tp1: main.o Pixel.o Imagen.o Complejo.o comando.o token.o cola.o pila.o

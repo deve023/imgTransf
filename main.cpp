@@ -20,7 +20,7 @@ static option_t options[] = {
 	{0, },
 };
 
-static string function;
+static cola function;
 static istream *iss = 0;
 static ostream *oss = 0;
 static fstream ifs;
@@ -81,12 +81,14 @@ static void opt_help(string const &arg)
 	exit(0);
 }
 
+cola shunting_yard(cola &);
+
 int main(int argc, char * const argv[])
 {
 	comando comando(options);
 	comando.parse(argc, argv);
 
-	Imagen orig;
+	Imagen orig, dest;
 	
 	// Leo imagen 
 	if(!orig.leerArchivoPgm(iss))
@@ -94,11 +96,10 @@ int main(int argc, char * const argv[])
 		cout << "Error al leer imagen" << endl;
 		return 1;
 	}
+
 	/*
-	Imagen dest;
-	
 	// Se aplica la transformacion correspondiente
-	dest = orig.transformar(function?)
+	dest = orig.transformar(function);
 
 	// Se escribe la imagen transformada
 	dest.escribirArchivoPgm(oss);

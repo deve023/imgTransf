@@ -29,6 +29,7 @@ public:
 	Complejo ln() const;
 
 	Complejo pot(int) const;
+	Complejo pot(const Complejo &) const;
 
 	const Complejo& operator = (const Complejo &);
 

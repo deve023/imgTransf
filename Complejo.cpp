@@ -142,6 +142,11 @@ Complejo Complejo::pot(const Complejo &c) const
 	return exponente.exp();
 }
 
+Complejo pot(double d, const Complejo & c)
+{
+	return Complejo(d,0).pot(c);
+}
+
 const Complejo& Complejo::operator = (const Complejo &c)
 {
 	this->setReal(c.getReal());

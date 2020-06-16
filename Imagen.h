@@ -7,6 +7,7 @@
 
 #include "Complejo.h"
 #include "Pixel.h"
+#include "Matriz.h"
 
 #include <iostream>
 
@@ -20,11 +21,11 @@ class Imagen
 private:
 	int sizeX, sizeY;
 	int intensidadMax;
-	Pixel **pixeles;
+	Matriz<Pixel> pixeles;
 
 public:
-	Imagen():sizeX(0),sizeY(0),intensidadMax(1),pixeles(NULL){};
-	Imagen(int **intensidadPixeles, int sx, int sy, int im);
+	Imagen();
+	Imagen(Matriz<int> intensidadPixeles, int sx, int sy, int im);
 	Imagen(const Imagen &);
 	~Imagen();
 
@@ -38,7 +39,7 @@ public:
 	// pre: pixeles debe no ser NULL y sx e sy almacenar sus dimensiones y ser ambos positivos.
 	//      Las intensidades deben estar en el rango [0, intensidadMax].
 	// post: imagen tendra almacenados sus pixeles, con intensidad y posicion en el plano complejo acordes. Asi como sizeX y sizeY.
-	bool setPixeles(int **intensidadPixeles, int sx, int sy);
+	bool setPixeles(Matriz<int> intensidadPixeles, int sx, int sy);
 
 	int getSizeX() const;
 	int getSizeY() const;
@@ -48,13 +49,12 @@ public:
 	// Si this->pixeles es NULL devuelve NULL.
 	// pre: imagen deberia existir y tener una matriz de pixeles asociada
 	// post: se devuelve un puntero a la matriz copia de pixeles
-	Pixel **getPixeles() const;
-
+	Matriz<Pixel> getPixeles() const  ;
 	// Se devuelve un puntero a una matriz dinamica que almacena las intensidades de los pixeles asociados a la imagen
 	// Si this->pixeles es NULL devuelve NULL.
 	// pre: imagen deberia existir y tener una matriz de pixeles asociada
 	// post: se devuelve un puntero a la matriz dinamica de intensidades de pixeles
-	int ** getIntensidadPixeles() const;
+	Matriz<int> getIntensidadPixeles() const;
 
 	Imagen &operator = (const Imagen &);
 

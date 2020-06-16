@@ -59,7 +59,7 @@ class lista
     	bool contiene(const T &) const;
     	void insertar(const T &); //inserta nodo al principio
         void agregar(const T &); //inserta nodo al final
-        T& primero(); //devuelve el dato del primer nodo
+        T& primero() const; //devuelve el dato del primer nodo
         void borrar(size_t); //borra el i-esimo nodo
         void swap_primeros2(); //intercambia los primeros dos elementos
         void imprimir() const;
@@ -237,7 +237,7 @@ void lista<T>::agregar(const T & elem)
 }
 
 template<typename T>
-T& lista<T>::primero()
+T& lista<T>::primero() const
 {
     return pri_->dato_;
 }

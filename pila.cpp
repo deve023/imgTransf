@@ -1,48 +1,53 @@
 #include "pila.h"
 
-pila::pila() : lista_(), tam_(0) 
+template<typename T>
+pila<T>::pila() : lista_(), tam_(0) 
+{
+}
+
+template<typename T>
+pila<T>::pila(const pila & p) : lista_(p.lista_), tam_(p.tam_) 
+{
+}
+
+template<typename T>
+pila<T>::~pila()
 {
 }
 
 
-pila::pila(const pila & p) : lista_(p.lista_), tam_(p.tam_) 
+
+
+
+template<typename T>
+void pila<T>::push(const T & dato)
 {
-}
-
-
-pila::~pila()
-{
-}
-
-
-void pila::push(const token & t)
-{
-    lista_.insertar(t);
+    lista_.insertar(dato);
     tam_++;
 }
 
-
-token pila::pop()
+template<typename T>
+T pila<T>::pop()
 {
     if(vacia())
-        return token();
-
-    token t = lista_.primero();
+        return T();
+    T dato = lista_.primero();
     lista_.borrar(0);
     tam_--;
-    return t;
+    return dato;
 }
 
-
-token pila::tope()
+template<typename T>
+T pila<T>::tope() const
 {
     if(vacia())
-        return token();
+        return T();
     return lista_.primero();
 }
 
 
-bool pila::vacia()
+template<typename T>
+bool pila<T>::vacia() const
 {
     return lista_.vacia();
 }

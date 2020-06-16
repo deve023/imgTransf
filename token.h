@@ -1,8 +1,9 @@
 #ifndef _TOKEN_H_
 #define _TOKEN_H_
 
-#include "Complejo.h"
 #include "lista.h"
+#include "Complejo.h"
+#include "cola.h"
 
 #include <string>
 #include <iostream>
@@ -10,7 +11,6 @@
 using namespace std;
 
 typedef enum{NONE, FUNCTION, LPAR, RPAR, OPERATOR, NUMBER, J, Z} token_type_t;
-
 
 class token
 {
@@ -46,6 +46,8 @@ class token
 
 };
 
-lista<token> strtolist(string str);
+
+cola<token> strtocola(string);
+Complejo transformar(cola<token> &, Complejo const &);
 
 #endif //_TOKEN_H_

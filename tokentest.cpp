@@ -5,18 +5,23 @@
 
 using namespace std;
 
-cola shunting_yard(cola);
+cola<token> shunting_yard(cola<token>);
 
 int main()
 {
-    cola cInfix, cRPN;
+    cola<token> cRPN;
 
-    cInfix.strtocola("(3*6 - (5*8 + 3) + 5) / 2");
+    cola<token> cInfix = strtocola("(z+4)*3+j*2");
     cRPN = shunting_yard(cInfix);
 
-    while(!cRPN.vacia())
+
+    Complejo resultado = transformar(cRPN, Complejo(1,1));
+    cout<<resultado<<endl;
+    
+    /*while(!cRPN.vacia())
         cout << cRPN.desencolar() << " ";
-    cout << endl;
+    cout << endl;*/
+    
 /*
 
     
@@ -101,10 +106,10 @@ int main()
     */
 }
 
-cola shunting_yard(cola infix)
+cola<token> shunting_yard(cola<token> infix)
 {
-    cola output;
-    pila opPila;
+    cola<token> output;
+    pila<token> opPila;
 
     while(!infix.vacia())
     {
@@ -145,11 +150,11 @@ cola shunting_yard(cola infix)
                 while(!opPila.vacia() && !(opPila.tope().getType() == LPAR))
                     output.encolar(opPila.pop());
                 if(opPila.vacia())
-                    return cola(); // error: la expresion esta desbalanceada. Devuelve Cola() por defecto.
+                    return cola<token>(); // error: la expresion esta desbalanceada. Devuelve Cola() por defecto.
                 opPila.pop(); // Descarta el LPAR que esta en la pila
                 break;
             default:
-                return cola(); // Si no es de ninguno de estos tipos, hubo un error. Devuelve Cola() por defecto.
+                return cola<token>(); // Si no es de ninguno de estos tipos, hubo un error. Devuelve Cola() por defecto.
         }
     }
 

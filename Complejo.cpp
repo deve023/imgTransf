@@ -209,3 +209,4 @@ std::ostream & operator << (std::ostream &os, const Complejo &c)
 {
 	return os << "(" << c.real << ", " << c.imag << ")";
 }
+

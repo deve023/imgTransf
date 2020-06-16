@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+#include "cola.h"
+//class token;
+
 class Complejo
 {
 
@@ -48,7 +51,10 @@ public:
 	
 	friend std::ostream & operator << (std::ostream &, const Complejo &);
 	
+	
+
 };
+
 
 
 #endif // _COMPLEJO_INCLUDED_

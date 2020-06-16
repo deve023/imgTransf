@@ -32,6 +32,8 @@ public:
 	Complejo ln() const;
 
 	Complejo pot(int) const;
+	Complejo pot(const Complejo &) const;
+	friend Complejo pot(double, const Complejo &);
 
 	const Complejo& operator = (const Complejo &);
 
@@ -51,8 +53,6 @@ public:
 	
 	friend std::ostream & operator << (std::ostream &, const Complejo &);
 	
-	
-
 };
 
 

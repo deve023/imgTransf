@@ -142,6 +142,56 @@ Complejo Complejo::operator + (Complejo const &c) const
 	return Complejo(this->real + c.real, this->imag + c.imag);
 }
 
+Complejo Complejo::pot(int e) const
+{
+	Complejo resultado = Complejo(1,1);
+	Complejo aux;
+
+	if(this->modulo() == 0)
+		return Complejo();
+
+	if(e < 0)
+	{
+		aux = 1.0 / *this;
+		e *= -1;
+	}
+	else
+		aux = *this;
+
+	if(e == 1)
+		return aux;
+
+	if(e == 0)
+		return resultado;
+
+	if(e > 0)
+	{
+		Complejo recu = aux.pot(e/2);
+		resultado = recu * recu;
+		if(e & 1) // e impar
+			resultado = resultado * aux;
+	}
+
+	return resultado;
+}
+
+Complejo Complejo::pot(const Complejo &c) const
+{
+	if(this->modulo() == 0)
+		return Complejo();
+
+	if(c.modulo() == 0)
+		return Complejo(1,0);
+
+	Complejo exponente = c * this->ln();
+
+	return exponente.exp();
+}
+
+Complejo pot(double d, const Complejo & c)
+{
+	return Complejo(d,0).pot(c);
+}
 Complejo Complejo::operator + (double d) const
 {
 	return Complejo(this->real + d, this->imag);

@@ -8,7 +8,6 @@
 #include "Complejo.h"
 #include "Pixel.h"
 #include "Matriz.h"
-#include "token.h"
 
 #include <iostream>
 
@@ -20,13 +19,13 @@ class Imagen
 {
 
 private:
-	int sizeX, sizeY;
+	size_t sizeX, sizeY;
 	int intensidadMax;
 	Matriz<Pixel> pixeles;
 
 public:
 	Imagen();
-	Imagen(Matriz<int> intensidadPixeles, int sx, int sy, int im);
+	Imagen(Matriz<int> intensidadPixeles, size_t sx, size_t sy, int im);
 	Imagen(const Imagen &);
 	~Imagen();
 
@@ -40,7 +39,7 @@ public:
 	// pre: pixeles debe no ser NULL y sx e sy almacenar sus dimensiones y ser ambos positivos.
 	//      Las intensidades deben estar en el rango [0, intensidadMax].
 	// post: imagen tendra almacenados sus pixeles, con intensidad y posicion en el plano complejo acordes. Asi como sizeX y sizeY.
-	bool setPixeles(Matriz<int> intensidadPixeles, int sx, int sy);
+	bool setPixeles(Matriz<int> intensidadPixeles, size_t sx, size_t sy);
 
 	int getSizeX() const;
 	int getSizeY() const;
@@ -50,8 +49,7 @@ public:
 	// Si this->pixeles es NULL devuelve NULL.
 	// pre: imagen deberia existir y tener una matriz de pixeles asociada
 	// post: se devuelve un puntero a la matriz copia de pixeles
-	Matriz<Pixel> getPixeles() const;
-	
+	Matriz<Pixel> getPixeles() const  ;
 	// Se devuelve un puntero a una matriz dinamica que almacena las intensidades de los pixeles asociados a la imagen
 	// Si this->pixeles es NULL devuelve NULL.
 	// pre: imagen deberia existir y tener una matriz de pixeles asociada
@@ -59,6 +57,8 @@ public:
 	Matriz<int> getIntensidadPixeles() const;
 
 	Imagen &operator = (const Imagen &);
+
+	// Imagen transformar(funcion?) const;
 
 	// Se lee una imagen en formato PGM de (*istream) y se almacena en el objeto imagen.
 	// pre: istream debe estar apuntando al archivo ya abierto en modo lectura, este debe ser de texto y respetar el formato de imagen PGM.
@@ -72,9 +72,6 @@ public:
 	// pre: ostream debe estar apuntando a un archivo de texto ya abierto en modo escritura. La imagen debe no ser nula.
 	// post: el archivo queda reescrito con los datos de la imagen en formato PGM.
 	void escribirArchivoPgm(ostream *) const;
-	
-	
-	Imagen transformarImagen(cola<token> &) const;
 };
 
 #endif // IMAGEN_H_INCLUDED_

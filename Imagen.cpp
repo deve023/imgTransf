@@ -10,7 +10,7 @@ Imagen:: Imagen ()
 	this->pixeles.setMatriz(NULL,0,0);
 }
 
-Imagen::Imagen(Matriz<int> intensidadPixeles, int sx, int sy, int im)
+Imagen::Imagen(Matriz<int> intensidadPixeles, size_t sx, size_t sy, int im)
 {
 	// Si los valores son invalidos, se crea una imagen nula por defecto.
 	if(sx < 1 || sy < 1 || im < 1 || im > INTENSIDADMAX_MAX || intensidadPixeles.esVacia()==true)
@@ -47,7 +47,7 @@ bool Imagen::setIntensidadMax(int im)
 	return true;
 }
 
-bool Imagen::setPixeles(Matriz<int> intensidadPixeles, int sx, int sy)
+bool Imagen::setPixeles(Matriz<int> intensidadPixeles, size_t sx, size_t sy)
 {
 	if(sx<1 || sy<1 || intensidadPixeles.esVacia()==true)
 		return false;
@@ -64,9 +64,9 @@ bool Imagen::setPixeles(Matriz<int> intensidadPixeles, int sx, int sy)
 
 	Matriz<Pixel> aux (this->sizeX, this->sizeY);
 	
-	for(int i = 0; i < this->sizeY; i++)
+	for(size_t i = 0; i < this->sizeY; i++)
 	{
-		for(int j = 0; j < this->sizeX; j++)
+		for(size_t j = 0; j < this->sizeX; j++)
 		{
 			int intensidad = intensidadPixeles[i][j];
 
@@ -95,8 +95,8 @@ Matriz<int> Imagen::getIntensidadPixeles() const
 		return Matriz<int>();
 
 	Matriz<int> intensidadPixeles (this->sizeX,this->sizeY);
-	for(int i = 0; i < this->sizeY; i++)
-		for(int j = 0; j < this->sizeX; j++)
+	for(size_t i = 0; i < this->sizeY; i++)
+		for(size_t j = 0; j < this->sizeX; j++)
 			intensidadPixeles[i][j] = this->pixeles[i][j].getIntensidad();
 	return intensidadPixeles;
 }
@@ -159,7 +159,7 @@ bool Imagen::leerArchivoPgm(istream *iss)
 	if(!(*iss >> intensidadMax) || intensidadMax < 1 || intensidadMax > INTENSIDADMAX_MAX)
 		return false;
 
-	int i,j;
+	size_t i,j;
 	Matriz<int> aux(x,y);
 	for(i=0; i < y; i++)
 	{
@@ -192,7 +192,7 @@ void Imagen::escribirArchivoPgm(ostream *oss) const
 	<< this->sizeX << " " << this->sizeY << endl
 	<< this->intensidadMax << endl;
 
-	int i, j;
+	size_t i, j;
 	for(i = 0; i < this->sizeY; i++)
 	{
 		for(j = 0; j < this->sizeX-1; j++){
@@ -220,15 +220,15 @@ Imagen Imagen::transformarImagen(cola<token> & rpn) const
 	double distY = 2.0 / (dest.sizeY - 1);
 
 	Matriz<Pixel> aux(this->sizeX,this->sizeY);
-	for(int i = 0; i < dest.sizeY; i++)
+	for(size_t i = 0; i < dest.sizeY; i++)
 	{
-		for(int j = 0; j < dest.sizeX; j++)
+		for(size_t j = 0; j < dest.sizeX; j++)
 		{
 			Complejo posDest(-1 + j*distX, 1 - i*distY);
 			Complejo posOrig = transformar(rpn, posDest);
 
-			int jOrig = round((posOrig.getReal() + 1.0) / distX);
-			int iOrig = round((1.0 - posOrig.getImag()) / distY);
+			size_t jOrig = round((posOrig.getReal() + 1.0) / distX);
+			size_t iOrig = round((1.0 - posOrig.getImag()) / distY);
 
 			int intensidad;
 			if(iOrig < 0 || iOrig >= this->sizeY || jOrig < 0 || jOrig >= this->sizeX)

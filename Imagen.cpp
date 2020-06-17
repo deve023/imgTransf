@@ -1,4 +1,10 @@
+
 #include "Imagen.h"
+#include "Pixel.h"
+#include "Matriz.h"
+#include "Complejo.h"
+#include "token.h"
+#include "cola.h"
 
 #include <iostream>
 #include <sstream>
@@ -149,7 +155,7 @@ bool Imagen::leerArchivoPgm(istream *iss)
 
 	istringstream issAux(line);
 
-    int x, y;
+    size_t x, y;
     if(!(issAux >> x) || x < 1)
 		return false;
     

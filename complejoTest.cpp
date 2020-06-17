@@ -8,9 +8,6 @@ int main()
 {
 	Complejo a(-1,3), b(3,4), c(0,0), d(-1, 3), e(-2, -8), f(2, -7);
 
-	cout << pot(2, b) << endl;
-
-/*
 	cout << "--------------------------------------" << endl;
 
 	cout << endl;
@@ -82,22 +79,7 @@ int main()
 	cout << "--------------------------------------" << endl;
 
 	cout << endl;
-	cout << "Potenciacion con enteros" << endl;
-	cout << b << "^2 = " << b.pot(2) << endl;
-	cout << c << "^4 = " << c.pot(4) << endl;
-	cout << d << "^1 = " << d.pot(1) << endl;
-	cout << e << "^0 = " << e.pot(0) << endl;
-	cout << b << "^3 = " << b.pot(3) << endl;
-	cout << c << "^7 = " << c.pot(7) << endl;
-	cout << f << "^(-5) = " << f.pot(-5) << endl;
-	cout << d << "^(-1) = " << d.pot(-1) << endl;
-	cout << e << "^(-2) = " << e.pot(-2) << endl;
-	cout << endl;
-
-	cout << "--------------------------------------" << endl;
-
-	cout << endl;
-	cout << "Potenciacion con complejos" << endl;
+	cout << "Potenciacion" << endl;
 	cout << b << " ^ " << b << " = " << b.pot(b) << endl;
 	cout << c << " ^ " << b << " = " << c.pot(b) << endl;
 	cout << d << " ^ " << c << " = " << d.pot(c) << endl;
@@ -116,6 +98,6 @@ int main()
 	cout << endl;
 
 	cout << "--------------------------------------" << endl;
-*/
+
 }
  

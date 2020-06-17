@@ -23,7 +23,7 @@ static option_t options[] = {
 	{0, },
 };
 
-static cola function;
+static cola<token> function;
 static istream *iss = 0;
 static ostream *oss = 0;
 static fstream ifs;
@@ -90,8 +90,8 @@ static void opt_function(string const &arg)
 	else
 		f = arg;
 
-	cola infix;
-	infix.strtocola(f);
+	cola<token> infix;
+	infix = strtocola(f);
 
 	if(!esValida(infix))
 	{

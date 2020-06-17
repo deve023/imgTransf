@@ -8,6 +8,8 @@
 #include "Complejo.h"
 #include "Pixel.h"
 #include "Matriz.h"
+#include "cola.h"
+#include "token.h"
 
 #include <iostream>
 
@@ -58,7 +60,11 @@ public:
 
 	Imagen &operator = (const Imagen &);
 
-	// Imagen transformar(funcion?) const;
+	// Recibe una cola de tokens, la cual contiene la transformacion a aplicar en RPN.
+	// Devuelve una Imagen que es la transformada de esta segun la transformacion correspondiente a la cola de tokens.
+	// pre: La imagen debe haber sido creada y no ser nula. La transformacion debe ser valida y estar en RPN.
+	// post: Se devuelve el resultado de transformar la imagen, segun la transformacion de la cola de tokens.
+	Imagen transformarImagen(cola<token> & rpn) const;
 
 	// Se lee una imagen en formato PGM de (*istream) y se almacena en el objeto imagen.
 	// pre: istream debe estar apuntando al archivo ya abierto en modo lectura, este debe ser de texto y respetar el formato de imagen PGM.

@@ -24,10 +24,10 @@ public:
 	// post: -
 	bool esVacia()const;	
 
-	// Recibe un doble puntero a T, y su tamaño, y setea el valor de matriz acorde.
-	// pre: El doble puntero debe tener memoria asignada.
-	// post: La matriz contiene los valores pasados mediante el doble puntero a T.
-	void setMatriz (T**, size_t , size_t);
+	// Libera la memoria asignada a la matriz y le asgina valores nulos a los atributos.
+	// pre: -
+	// post: -
+	void setMatrizNULL();
 	
 	T* operator[](size_t) const;
 	const Matriz &operator = (const Matriz &);
@@ -94,48 +94,27 @@ T* Matriz<T>::operator[](size_t indice) const
 }
 
 template <typename T>
-void Matriz<T>::setMatriz(T** m, size_t x, size_t y)
+void Matriz<T>::setMatrizNULL()
 {
-	this->x=x;
-	this->y=y;
-
-	if (this->matriz)
+	if(this->matriz)
 	{
-		for (size_t i=0; i < this->y; i++)
-			delete[] this->matriz [i];
-		delete[] this -> matriz;
-		this->matriz=NULL;
-	}
-
-	if (m==NULL)
-		this->matriz=NULL;
-
-	else
-	{
-		this->matriz = new T * [this->y];
-		for(size_t i = 0; i < this->y; i++)
-		{	
-			this->matriz[i] = new T [this->x];
-			for (size_t j = 0; j<this->x; j++)
-				this->matriz [i][j] = m[i][j];
-		}
+		for(int i = 0; i < this->y; i++)
+			delete[] this->matriz[i];
+		delete[] this->matriz;
+		this->matriz = NULL;
+		this->x = 0;
+		this->y = 0;
 	}
 }	
 
 template <typename T>
 const Matriz<T> & Matriz<T>::operator = (const Matriz &m)
 {
-
-	if (this->matriz){
-		for(size_t i = 0; i < this->y; i++)
-			delete[] this->matriz[i];
-		delete[] this->matriz;
-		this->matriz=NULL;
-	}	
+	this->setMatrizNULL();
 
 	if(m.esVacia())
 	{
-		this->setMatriz(NULL, 0, 0);
+		this->setMatrizNULL();
 		return *this;
 	}
 

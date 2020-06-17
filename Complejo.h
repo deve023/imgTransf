@@ -4,7 +4,6 @@
 #include <iostream>
 
 #include "cola.h"
-//class token;
 
 class Complejo
 {
@@ -24,16 +23,23 @@ public:
 	void setReal(double);
 	void setImag(double);
 
+	// Calcula el modulo del complejo y lo devuelve.
 	double modulo() const;
+
+	// Calcula el argumento del complejo y lo devuelve.
 	double arg() const;
+
+	// Calcula el conjugado del complejo y lo devuelve.
 	Complejo conjugar() const;
 
+	// Devuelve el resultado de aplicar exp(z).
 	Complejo exp() const;
+
+	// Devuelve el resultado de aplicar ln(z).
 	Complejo ln() const;
 
-	Complejo pot(int) const;
+	// Devuelve el resultado de aplicar z^w, siendo z y w dos complejos. z siendo el complejo al que se le aplica el metodo.
 	Complejo pot(const Complejo &) const;
-	friend Complejo pot(double, const Complejo &);
 
 	const Complejo& operator = (const Complejo &);
 

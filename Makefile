@@ -3,10 +3,10 @@ CXXFLAGS = -Wall -pedantic -g
 
 all: tp1
 
-token.o: token.cpp token.h Complejo.h lista.h cola.h pila.h
+token.o: token.cpp token.h Complejo.h lista.h cola.h 
 	$(CXX) $(CXXFLAGS) -c token.cpp
 
-Complejo.o: Complejo.cpp Complejo.h
+Complejo.o: Complejo.cpp Complejo.h cola.h
 	$(CXX) $(CXXFLAGS) -c Complejo.cpp
 
 Pixel.o: Pixel.cpp Pixel.h Complejo.h

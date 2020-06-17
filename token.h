@@ -4,6 +4,7 @@
 #include "lista.h"
 #include "Complejo.h"
 #include "cola.h"
+#include "pila.h"
 
 #include <string>
 #include <iostream>

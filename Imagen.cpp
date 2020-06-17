@@ -202,3 +202,42 @@ void Imagen::escribirArchivoPgm(ostream *oss) const
 		(*oss) << this->pixeles[i][j].getIntensidad() << endl;
 	}
 }
+
+
+Imagen Imagen::transformarImagen(cola<token> & rpn) const
+{
+	Imagen dest;
+
+	// Si la imagen no tiene pixeles, se devuelve una imagen con valores nulos
+	if(this->pixeles.esVacia()==true)
+		return dest;
+
+	dest.setIntensidadMax(this->intensidadMax);
+	dest.sizeX=this->sizeX;
+	dest.sizeY=this->sizeY;
+
+	double distX = 2.0 / (dest.sizeX - 1);
+	double distY = 2.0 / (dest.sizeY - 1);
+
+	Matriz<Pixel> aux(this->sizeX,this->sizeY);
+	for(int i = 0; i < dest.sizeY; i++)
+	{
+		for(int j = 0; j < dest.sizeX; j++)
+		{
+			Complejo posDest(-1 + j*distX, 1 - i*distY);
+			Complejo posOrig = transformar(rpn, posDest);
+
+			int jOrig = round((posOrig.getReal() + 1.0) / distX);
+			int iOrig = round((1.0 - posOrig.getImag()) / distY);
+
+			int intensidad;
+			if(iOrig < 0 || iOrig >= this->sizeY || jOrig < 0 || jOrig >= this->sizeX)
+				intensidad = 0;
+			else
+				intensidad = this->pixeles[iOrig][jOrig].getIntensidad();
+			aux[i][j] = Pixel(intensidad, posDest);
+		}
+	}
+	dest.pixeles = aux;
+	return dest;
+}

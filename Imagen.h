@@ -8,6 +8,7 @@
 #include "Complejo.h"
 #include "Pixel.h"
 #include "Matriz.h"
+#include "token.h"
 
 #include <iostream>
 
@@ -58,8 +59,6 @@ public:
 
 	Imagen &operator = (const Imagen &);
 
-	// Imagen transformar(funcion?) const;
-
 	// Se lee una imagen en formato PGM de (*istream) y se almacena en el objeto imagen.
 	// pre: istream debe estar apuntando al archivo ya abierto en modo lectura, este debe ser de texto y respetar el formato de imagen PGM.
 	//      Asi como tener almacenada una imagen no nula.
@@ -72,6 +71,9 @@ public:
 	// pre: ostream debe estar apuntando a un archivo de texto ya abierto en modo escritura. La imagen debe no ser nula.
 	// post: el archivo queda reescrito con los datos de la imagen en formato PGM.
 	void escribirArchivoPgm(ostream *) const;
+	
+	
+	Imagen transformarImagen(cola<token> &) const;
 };
 
 #endif // IMAGEN_H_INCLUDED_

@@ -1,0 +1,7 @@
+P2
+#Test 4: Debe terminar sin mensaje de error, es una matriz de ceros
+3 3
+10
+0 0 0 
+0 0 0
+0 0 0

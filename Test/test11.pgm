@@ -1,0 +1,10 @@
+P2
+#Test 11: Se espera error al cargar imagen ya que la matriz no cumple el tamaño especificado (más grande) 
+5 7
+5
+1 2 3 4 5 2
+1 2 3 4 5 2
+1 2 3 4 5 2
+1 2 3 4 5 2
+5 3 3 3 5 2
+2 3 3 4 5 1

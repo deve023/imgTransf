@@ -1,0 +1,7 @@
+P2
+#Test 16: Debe mostrar mensaje de error porque se pasa un simbolo no númerico en la matriz
+4 3
+4
+1 2 3 4
+1 2 a 4
+1 2 3 4

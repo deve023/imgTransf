@@ -1,0 +1,9 @@
+P3
+#Test 6: Debe mostrar mensaje de error ya que no comienza con P2
+5 5
+9
+1 2 3 4 5
+1 2 3 4 5 
+9 8 7 6 5
+9 8 7 6 5 
+1 2 3 4 5

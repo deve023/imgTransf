@@ -1,0 +1,7 @@
+P2
+#Test 12: Se espera error al cargar imagen ya que la matriz contiene intensidades mayores a la máxima 
+5 3
+5
+1 2 3 4 5 
+1 2 3 6 5
+1 2 3 4 5

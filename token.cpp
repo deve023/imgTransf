@@ -122,15 +122,21 @@ ostream & operator<<(ostream &os, const token &t)
 
 cola<token> strtocola(string str)
 {
-    // Primero se vacia la cola
     cola<token> output;
     string buffer;
-
+	
     for(size_t i = 0; i <= str.length(); i++)
     {
         if(str[i] == ' ')
             continue;
-
+		
+		if(str[i] == '-' && (i==0 || str[i-1]=='('))
+		{
+			output.encolar(token(NUMBER, "-1", Complejo(-1,0)));
+			output.encolar(token(OPERATOR,"*",3,true));
+			continue;
+		}
+		
         if(!buffer.empty() && isalpha(buffer[0]) && !isalnum(str[i]))
         {
             if(buffer[0] == 'j' && buffer.length() == 1)
@@ -178,6 +184,7 @@ cola<token> strtocola(string str)
     
     return output;
 }
+
 
 Complejo transformar(cola<token> rpn, Complejo const & z)
 {

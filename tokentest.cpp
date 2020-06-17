@@ -11,16 +11,16 @@ int main()
 {
     cola<token> cRPN;
 
-    cola<token> cInfix = strtocola("(z+4)*3+j*2");
+    cola<token> cInfix = strtocola("-z*(-j)-1");
     cRPN = shunting_yard(cInfix);
 
 
     Complejo resultado = transformar(cRPN, Complejo(1,1));
     cout<<resultado<<endl;
     
-    /*while(!cRPN.vacia())
+    while(!cRPN.vacia())
         cout << cRPN.desencolar() << " ";
-    cout << endl;*/
+    cout << endl;
     
 /*
 

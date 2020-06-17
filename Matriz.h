@@ -113,7 +113,6 @@ void Matriz<T>::setMatriz(T** m, size_t x, size_t y)
 	else
 	{
 		this->matriz = new T * [this->y];
-
 		for(size_t i = 0; i < this->y; i++)
 		{	
 			this->matriz[i] = new T [this->x];
@@ -154,5 +153,6 @@ const Matriz<T> & Matriz<T>::operator = (const Matriz &m)
 		
 	return *this;
 }
+
 
 #endif // _MATRIZ_H_INCLUDED_

@@ -40,10 +40,10 @@ Matriz<T>::Matriz (const Matriz &m)
 
 	this->matriz = new T * [this->y];
 
-	for(int i = 0; i < this->y; i++)
+	for(size_t i = 0; i < this->y; i++)
 	{	
 		this->matriz[i] = new T [this->x];
-		for (int j = 0;j<this->x;j++)
+		for (size_t j = 0;j<this->x;j++)
 			this->matriz[i][j]=m.matriz[i][j]; 
 	} 
 }
@@ -56,7 +56,7 @@ Matriz<T>:: Matriz (int x, int y)
 
 	this->matriz = new T * [this->y];
 
-	for(int i = 0; i < this->y; i++)
+	for(size_t  i = 0; i < this->y; i++)
 		this->matriz[i] = new T [this->x];
 
 }
@@ -66,7 +66,7 @@ Matriz<T>::~Matriz()
 {
 	if(this->matriz)
 	{
-		for(int i = 0; i < this->y; i++)
+		for(size_t  i = 0; i < this->y; i++)
 			delete[] this->matriz[i];
 		delete[] this->matriz;
 	}
@@ -95,7 +95,7 @@ void Matriz<T>::setMatriz(T** m, int x, int y)
 
 	if (this->matriz)
 	{
-		for (int i=0; i < this->y; i++)
+		for (size_t  i=0; i < this->y; i++)
 			delete[] this->matriz [i];
 		delete[] this -> matriz;
 		this->matriz=NULL;
@@ -108,10 +108,10 @@ void Matriz<T>::setMatriz(T** m, int x, int y)
 	{
 		this->matriz = new T * [this->y];
 
-		for(int i = 0; i < this->y; i++)
+		for(size_t  i = 0; i < this->y; i++)
 		{	
 			this->matriz[i] = new T [this->x];
-			for (int j = 0; j<this->x; j++)
+			for (size_t  j = 0; j<this->x; j++)
 				this->matriz [i][j] = m[i][j];
 		}
 	}
@@ -122,7 +122,7 @@ const Matriz<T> & Matriz<T>::operator = (const Matriz &m)
 {
 
 	if (this->matriz){
-		for(int i = 0; i < this->y; i++)
+		for(size_t  i = 0; i < this->y; i++)
 			delete[] this->matriz[i];
 		delete[] this->matriz;
 		this->matriz=NULL;
@@ -139,10 +139,10 @@ const Matriz<T> & Matriz<T>::operator = (const Matriz &m)
 
 	this->matriz = new T * [this->y];
 
-	for(int i = 0; i < this->y; i++)
+	for(size_t  i = 0; i < this->y; i++)
 	{	
 		this->matriz[i] = new T [this->x];
-		for(int j = 0; j<this->x; j++)
+		for(size_t  j = 0; j<this->x; j++)
 			this->matriz [i][j] = m.matriz [i][j];
 	}
 		
@@ -158,9 +158,9 @@ void Matriz<T>::imprimir()
 		cout << "Matriz nula" << endl;
 	else
 	{
-		for (int i=0;i<this->y;i++)
+		for (size_t  i=0;i<this->y;i++)
 		{
-			for (int j=0;j<this->x;j++)
+			for (size_t  j=0;j<this->x;j++)
 				cout<<this->matriz[i][j];
 			cout<<endl;
 		}

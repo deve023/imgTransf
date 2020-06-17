@@ -36,9 +36,7 @@ static fstream ofs;
 cola<token> shunting_yard(cola<token> infix);
 
 // Recibe una cola de tokens y devuelve un booleano indicando si la transformacion que representa es valida.
-// La cola de tokens se considera no valida si:
-//			Contiene una funcion que el programa no soporte.
-//			No contiene la variable z.
+// La cola de tokens se considera no valida si contiene una funcion que el programa no soporte.
 // pre: la cola de tokens debe haber sido creada y no estar vacia.
 // post: Devuelve un booleano acorde.
 bool esValida(cola<token> c);
@@ -198,17 +196,8 @@ cola<token> shunting_yard(cola<token> infix)
 
 bool esValida(cola<token> c)
 {
-	bool isZ = false;
-
 	while(!c.vacia())
 	{
-		token t = c.desencolar();
-		if(t.getType() == Z)
-		{
-			isZ = true;
-			continue;
-		}
-
 		if(t.getType() != FUNCTION)
 			continue;
 
@@ -217,6 +206,5 @@ bool esValida(cola<token> c)
 			return false;
 
 	}
-
-	return isZ;
+	return true;
 }

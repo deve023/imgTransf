@@ -29,8 +29,19 @@ static ostream *oss = 0;
 static fstream ifs;
 static fstream ofs;
 
-cola shunting_yard(cola infix);
-bool esValida(cola c);
+// Recibe una cola de tokens en notacion infija y devuelve otra cola con tokens en RPN.
+// De haber un problema, como no estar balanceada la expresion, se devuelve una cola vacia.
+// pre: La cola pasada por argumento debe haber sido creada y no estar vacia.
+// post: Devuelve una cola de tokens lista para usarse y no vacia, si todo salio bien.
+cola<token> shunting_yard(cola<token> infix);
+
+// Recibe una cola de tokens y devuelve un booleano indicando si la transformacion que representa es valida.
+// La cola de tokens se considera no valida si:
+//			Contiene una funcion que el programa no soporte.
+//			No contiene la variable z.
+// pre: la cola de tokens debe haber sido creada y no estar vacia.
+// post: Devuelve un booleano acorde.
+bool esValida(cola<token> c);
 
 static void opt_input(string const &arg)
 {
@@ -126,10 +137,10 @@ int main(int argc, char * const argv[])
 	return 0;
 }
 
-cola shunting_yard(cola infix)
+cola<token> shunting_yard(cola<token> infix)
 {
-    cola output;
-    pila opPila;
+    cola<token> output;
+    pila<token> opPila;
 
     while(!infix.vacia())
     {
@@ -171,11 +182,11 @@ cola shunting_yard(cola infix)
                 while(!opPila.vacia() && !(opPila.tope().getType() == LPAR))
                     output.encolar(opPila.pop());
                 if(opPila.vacia())
-                    return cola(); // error: la expresion esta desbalanceada. Devuelve Cola() por defecto.
+                    return cola<token>(); // error: la expresion esta desbalanceada. Devuelve Cola() por defecto.
                 opPila.pop(); // Descarta el LPAR que esta en la pila
                 break;
             default:
-                return cola(); // Si no es de ninguno de estos tipos, hubo un error. Devuelve Cola() por defecto.
+                return cola<token>(); // Si no es de ninguno de estos tipos, hubo un error. Devuelve Cola() por defecto.
         }
     }
 
@@ -185,7 +196,7 @@ cola shunting_yard(cola infix)
     return output;
 }
 
-bool esValida(cola c)
+bool esValida(cola<token> c)
 {
 	bool isZ = false;
 

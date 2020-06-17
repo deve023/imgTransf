@@ -179,7 +179,7 @@ cola<token> strtocola(string str)
     return output;
 }
 
-Complejo transformar(cola<token> & rpn, Complejo const & z)
+Complejo transformar(cola<token> rpn, Complejo const & z)
 {
 	pila<Complejo> resultado;
     
@@ -220,8 +220,8 @@ Complejo transformar(cola<token> & rpn, Complejo const & z)
 			    resultado.push(a*b);
 			else if(actual.getValue() == "/")
 			    resultado.push(a/b);
-			//else if(actual.getValue() == "^")
-			  //  resultado.push(a^b);
+			else if(actual.getValue() == "^")
+				resultado.push(a.pot(b));
 		}
 		
 		if(actual.getType() == FUNCTION)

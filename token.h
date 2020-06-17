@@ -17,8 +17,8 @@ class token
     private:
         token_type_t type_;
         string value_;
-        Complejo complejo_; // Si no se trata de un NUMBER, sera el 0+0i. Si es z tambien se le asigna ese valor nulo.
-        int precedence_; // Si no se trata de un OPERATOR, sera 5.
+        Complejo complejo_; // Si no se trata de un NUMBER, sera el 0+0i. Para un J tendra valor i.
+        int precedence_; // Si no se trata de un OPERATOR, sera 0.
         bool l_assoc_; // Si no se trata de un OPERATOR sera falso
         
     public:
@@ -46,8 +46,16 @@ class token
 
 };
 
-
+// Recibe una string y devuelve la cola de tokens correspondiente.
+// Recorre la string de izq a der y va acolando los respectivos tokens.
+// pre: -
+// post: La cola de tokens mantiene el orden en que se leyo la string, de izq a der.
 cola<token> strtocola(string);
-Complejo transformar(cola<token> &, Complejo const &);
+
+// Recibe una cola de tokens que contiene la transformacion a aplicar en RPN y el complejo al cual se le aplica, devuelve el resultado.
+// En caso de no poder ejecutar la transformacion devuelve el complejo 0+0i.
+// pre: La cola debe no estar vacia y contener la transformacion en RPN. La transformacion debe ser valida.
+// post: Devuelve el resultado de aplicarle la transformacion al complejo.
+Complejo transformar(cola<token>, Complejo const &);
 
 #endif //_TOKEN_H_

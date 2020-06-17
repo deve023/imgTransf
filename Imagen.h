@@ -50,7 +50,8 @@ public:
 	// Si this->pixeles es NULL devuelve NULL.
 	// pre: imagen deberia existir y tener una matriz de pixeles asociada
 	// post: se devuelve un puntero a la matriz copia de pixeles
-	Matriz<Pixel> getPixeles() const  ;
+	Matriz<Pixel> getPixeles() const;
+	
 	// Se devuelve un puntero a una matriz dinamica que almacena las intensidades de los pixeles asociados a la imagen
 	// Si this->pixeles es NULL devuelve NULL.
 	// pre: imagen deberia existir y tener una matriz de pixeles asociada

@@ -17,9 +17,24 @@ class cola
         cola(const cola &);
         ~cola();
         
+        // Da de alta a un elemento pasado por argumento.
+        // pre: la cola debe haber sido creada.
+        // post: la cola modificada con la insercion del nuevo elemento.
         void encolar(const T &);
+
+        // Elimina el elemento del frente de la misma.
+        // pre: la cola, ya creada, no debe estar vacia.
+        // post: cola modificada por la eliminacio del elemento del frente.
         T desencolar();
+
+        // Retorna el valor del primer elemento de la cola.
+        // pre: la cola, ya creada, no debe estar vacia.
+        // post: -
         T frente() const;
+
+        // Devuelve un valor indicando si la cola esta vacia.
+        // pre: la cola debe haber sido creada.
+        // -
         bool vacia() const;
         
         const cola & operator = (const cola &);

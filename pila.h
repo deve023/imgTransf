@@ -16,9 +16,24 @@ class pila
         pila(const pila &);
         ~pila();
         
+        // Realiza el alta en la pila de un elemento pasado por argumento.
+        // pre: la pila debe haber sido creada.
+        // post: la pila modificada con la insercion del nuevo elemento.
         void push(const T &);
+
+        // Elimina el elemento del tope de la pila.
+        // pre: la pila, ya creada, debe no estar vacia.
+        // post: pila modificada por la eliminacion del elemento del tope.
         T pop();
+
+        // Retorna el valor tope de la pila.
+        // pre: la pila, ya creada, no debe estar vacia.
+        // post: -
         T tope() const;
+
+        // Devuelve un valor indicando si la pila esta vacia.
+        // pre: la pila debe haber sido creada.
+        // post: -
         bool vacia() const;
         
 };

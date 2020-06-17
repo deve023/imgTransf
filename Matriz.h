@@ -23,7 +23,6 @@ public:
 	T* operator[](int) const;
 	void setMatriz (T**, int , int);
 	const Matriz &operator = (const Matriz &);
-	void imprimir();
 	
 };
 
@@ -150,23 +149,6 @@ const Matriz<T> & Matriz<T>::operator = (const Matriz &m)
 }
 
 
-template <typename T>
-void Matriz<T>::imprimir()
-{
-	cout << this->x << endl <<this->y << endl;
-	if(this->matriz==NULL)
-		cout << "Matriz nula" << endl;
-	else
-	{
-		for (size_t  i=0;i<this->y;i++)
-		{
-			for (size_t  j=0;j<this->x;j++)
-				cout<<this->matriz[i][j];
-			cout<<endl;
-		}
-		cout<<endl;
-	}
-}
 
 #endif
 

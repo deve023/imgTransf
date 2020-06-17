@@ -21,7 +21,7 @@ comando.o: comando.cpp comando.h
 main.o: main.cpp Imagen.h comando.h pila.h cola.h token.h
 	$(CXX) $(CXXFLAGS) -c main.cpp
 
-tp1: main.o Pixel.o Imagen.o Complejo.o comando.o token.o cola.h pila.h
+tp1: main.o Pixel.o Imagen.o Complejo.o comando.o token.o 
 	$(CXX) $(CXXFLAGS) $^ -o tp1
 
 clean:

@@ -57,12 +57,22 @@ class lista
     	size_t tamano() const;
     	bool vacia() const;
     	bool contiene(const T &) const;
-    	void insertar(const T &); //inserta nodo al principio
-        void agregar(const T &); //inserta nodo al final
-        T& primero() const; //devuelve el dato del primer nodo
-        void borrar(size_t); //borra el i-esimo nodo
-        void swap_primeros2(); //intercambia los primeros dos elementos
-        void imprimir() const;
+    	
+    	
+    	//Inserta un nodo al principio de la lista
+    	void insertar(const T &);
+        
+        //Inserta un nodo al final de la lista
+        void agregar(const T &);
+        
+        //Elimina el i-esimo nodo, si existe
+        void borrar(size_t i);
+        
+        //Devuelve el dato correspondiente al primer nodo de la lista.
+        //Precondicion: La lista existe y no está vacía
+        T& primero() const;
+        
+
 
         const lista<T> & operator = (const lista<T> &);
     
@@ -278,37 +288,6 @@ void lista<T>::borrar(size_t i)
         
         tam_--;
     }
-}
-
-template<typename T>
-void lista<T>::swap_primeros2()
-{
-    if(tam_>=2)
-    {
-        T aux = pri_->dato_;
-        pri_->dato_ = pri_->sig_->dato_;
-        pri_->sig_->dato_ = aux;
-    }
-}
-
-
-template<typename T>
-void lista<T>::imprimir() const
-{
-    lista<T>::iterador iter(pri_);
-    if(!vacia())
-    {
-        while(!iter.extremo())
-        {
-            std::cout<<iter.dato()<<" ";
-            iter.avanzar();
-        }
-    }
-    else
-    {
-        std::cout<<"lista vacia";
-    }
-    std::cout<<std::endl;
 }
 
 template<typename T>

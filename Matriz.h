@@ -97,7 +97,7 @@ void Matriz<T>::setMatrizNULL()
 {
 	if(this->matriz)
 	{
-		for(int i = 0; i < this->y; i++)
+		for(size_t i = 0; i < this->y; i++)
 			delete[] this->matriz[i];
 		delete[] this->matriz;
 		this->matriz = NULL;

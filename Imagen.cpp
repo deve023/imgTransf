@@ -155,7 +155,7 @@ bool Imagen::leerArchivoPgm(istream *iss)
 
 	istringstream issAux(line);
 
-    size_t x, y;
+    long int x, y;
     if(!(issAux >> x) || x < 1)
 		return false;
     
@@ -167,9 +167,9 @@ bool Imagen::leerArchivoPgm(istream *iss)
 
 	size_t i,j;
 	Matriz<int> aux(x,y);
-	for(i=0; i < y; i++)
+	for(i=0; i < size_t(y); i++)
 	{
-		for (j=0;j<x;j++)
+		for (j=0;j<size_t(x);j++)
 			if(!(*iss>>aux[i][j]))	
 				return false;		 
 	}
@@ -182,7 +182,7 @@ bool Imagen::leerArchivoPgm(istream *iss)
 
 	// Se copia la data al objeto imagen.
 	this->intensidadMax = intensidadMax;
-	if(!this->setPixeles(aux, x, y))
+	if(!this->setPixeles(aux, size_t(x), size_t(y)))
 		return false; 
 
 	return true;

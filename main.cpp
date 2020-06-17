@@ -189,7 +189,11 @@ cola<token> shunting_yard(cola<token> infix)
     }
 
     while(!opPila.vacia())
+    {
+    	if(opPila.tope().getType() == LPAR)
+    		return cola<token>();
         output.encolar(opPila.pop());
+    }
 
     return output;
 }

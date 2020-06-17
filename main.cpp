@@ -127,7 +127,7 @@ int main(int argc, char * const argv[])
 		return 1;
 	}
 
-	dest = orig;
+	dest = orig.transformarImagen(function);
 
 	// Se escribe la imagen transformada
 	dest.escribirArchivoPgm(oss);
@@ -198,6 +198,8 @@ bool esValida(cola<token> c)
 {
 	while(!c.vacia())
 	{
+		token t = c.desencolar();
+		
 		if(t.getType() != FUNCTION)
 			continue;
 

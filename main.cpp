@@ -216,12 +216,17 @@ bool esValida(Cola<Token> c)
 
 		token_type_t sigType = sig.getType();
 
-		if(tType == RPAR)
-			continue;
 
 		if(tType == LPAR)
 		{
-			if(sigType == RPAR)
+			if(sigType == RPAR || sigType == OPERATOR)
+				return false;
+			continue;
+		}
+
+		if(tType == RPAR)
+		{
+			if(sigType != OPERATOR && sigType != RPAR)
 				return false;
 			continue;
 		}
@@ -247,7 +252,7 @@ bool esValida(Cola<Token> c)
 
 		if(tType == OPERATOR)
 		{
-			if(sigType == OPERATOR)
+			if(sigType == OPERATOR || sigType == RPAR)
 				return false;
 			continue;
 		}

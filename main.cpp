@@ -216,9 +216,15 @@ bool esValida(Cola<Token> c)
 
 		token_type_t sigType = sig.getType();
 
-
-		if(tType == LPAR || tType == RPAR)
+		if(tType == RPAR)
 			continue;
+
+		if(tType == LPAR)
+		{
+			if(sigType == RPAR)
+				return false;
+			continue;
+		}
 
 		if(tType == FUNCTION)
 		{

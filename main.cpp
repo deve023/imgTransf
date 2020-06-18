@@ -102,13 +102,12 @@ static void opt_function(string const &arg)
 	else
 		f = arg;
 
-	Cola<Token> infix;
+	static Cola<Token> infix;
 	infix = strtocola(f);
 
 	if(!esValida(infix))
 	{
 		cerr << "La funcion no es valida." << endl;
-		infix.~Cola();
 		exit(1);
 	}
 
@@ -116,7 +115,6 @@ static void opt_function(string const &arg)
 	if(function.vacia())
 	{
 		cerr << "La funcion no es valida." << endl;
-		infix.~Cola();
 		exit(1);
 	}
 }

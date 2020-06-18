@@ -93,7 +93,7 @@ static void opt_function(string const &arg)
 
 	if(!esValida(infix))
 	{
-		cerr << "La funcion no es valida." << endl;
+		cerr << "La funcion no es valida..." << endl;
 		exit(1);
 	}
 
@@ -203,18 +203,48 @@ bool esValida(Cola<Token> c)
 	while(!c.vacia())
 	{
 		Token t = c.desencolar();
-		
-		if(t.getType() != FUNCTION)
+		token_type_t tType = t.getType();
+		if(c.vacia())
+		{
+			// Si el ultimo token es un operador o una funcion o un LPAR, la expresion no tiene sentido.
+			if(tType == OPERATOR || tType == FUNCTION || tType == LPAR)
+				return false;
+			return true;
+		}
+
+		Token sig = c.frente();
+
+		token_type_t sigType = sig.getType();
+
+
+		if(tType == LPAR || tType == RPAR)
 			continue;
 
-		string v = t.getValue();
-		if(v != "exp" && v != "ln" && v != "re" && v != "im" && v != "abs" && v != "phase")
-			return false;
+		if(tType == FUNCTION)
+		{
+			string v = t.getValue();
+			if(v != "exp" && v != "ln" && v != "re" && v != "im" && v != "abs" && v != "phase")
+				return false;
 
-		t = c.desencolar();
-		if(t.getType() != LPAR)
-			return false;
+			// Seguido de un FUNCTION debe haber un LPAR.
+			if(sigType != LPAR)
+				return false;
+			continue;
+		}
 
+		if(tType == NUMBER || tType == Z || tType == J)
+		{
+			if(sigType != OPERATOR && sigType != RPAR)
+				return false;
+			continue;
+		}
+
+		if(tType == OPERATOR)
+		{
+			if(sigType == OPERATOR)
+				return false;
+			continue;
+		}
 	}
 	return true;
 }

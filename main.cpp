@@ -93,7 +93,7 @@ static void opt_function(string const &arg)
 
 	if(!esValida(infix))
 	{
-		cerr << "La funcion no es valida..." << endl;
+		cerr << "La funcion no es valida." << endl;
 		exit(1);
 	}
 

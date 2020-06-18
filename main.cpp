@@ -211,6 +211,10 @@ bool esValida(Cola<Token> c)
 		if(v != "exp" && v != "ln" && v != "re" && v != "im" && v != "abs" && v != "phase")
 			return false;
 
+		t = c.desencolar();
+		if(t.getType() != LPAR)
+			return false;
+
 	}
 	return true;
 }

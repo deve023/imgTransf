@@ -200,6 +200,15 @@ Cola<Token> shunting_yard(Cola<Token> infix)
 
 bool esValida(Cola<Token> c)
 {
+	if(c.vacia())
+		return false;
+
+	Token pri = c.frente();
+	token_type_t priType = pri.getType();
+
+	if(priType == OPERATOR || priType == RPAR)
+		return false;
+
 	while(!c.vacia())
 	{
 		Token t = c.desencolar();

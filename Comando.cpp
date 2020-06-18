@@ -1,16 +1,16 @@
-#include "comando.h"
+#include "Comando.h"
 
 #include <string>
 #include <cstdlib>
 #include <iostream>
 
-comando::comando()
+Comando::Comando()
 {}
 
-comando::comando(option_t *table) : option_table(table)
+Comando::Comando(option_t *table) : option_table(table)
 {}
 
-void comando::parse(int argc, char * const argv[])
+void Comando::parse(int argc, char * const argv[])
 {
 
 #define END_OF_OPTIONS(p)       \
@@ -53,7 +53,7 @@ void comando::parse(int argc, char * const argv[])
 	}
 }
 
-int comando::do_long_opt(const char *opt, const char *arg)
+int Comando::do_long_opt(const char *opt, const char *arg)
 {
 	for(option_t *op = option_table; op->long_name != 0; ++op)
 	{
@@ -85,7 +85,7 @@ int comando::do_long_opt(const char *opt, const char *arg)
 	return -1; // Valor de retorno para calmar al compilador
 }
 
-int comando::do_short_opt(const char *opt, const char *arg)
+int Comando::do_short_opt(const char *opt, const char *arg)
 {
 	option_t *op;
 

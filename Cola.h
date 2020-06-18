@@ -2,20 +2,19 @@
 #define _COLA_H_
 
 
-#include "lista.h"
-
+#include "Lista.h"
 
 template<typename T>
-class cola
+class Cola
 {
     private:
-        lista<T> lista_;
+        Lista<T> lista_;
         size_t tam_;
         
     public:   
-        cola();
-        cola(const cola &);
-        ~cola();
+        Cola();
+        Cola(const Cola &);
+        ~Cola();
         
         // Da de alta a un elemento pasado por argumento.
         // pre: la cola debe haber sido creada.
@@ -37,35 +36,35 @@ class cola
         // -
         bool vacia() const;
         
-        const cola & operator = (const cola &);
+        const Cola & operator = (const Cola &);
 
 };
 
 
 template<typename T>
-cola<T>::cola() : lista_(), tam_(0) 
+Cola<T>::Cola() : lista_(), tam_(0) 
 {
 }
 
 template<typename T>
-cola<T>::cola(const cola & c) : lista_(c.lista_), tam_(c.tam_) 
+Cola<T>::Cola(const Cola & c) : lista_(c.lista_), tam_(c.tam_) 
 {
 }
 
 template<typename T>
-cola<T>::~cola()
+Cola<T>::~Cola()
 {
 }
 
 template<typename T>
-void cola<T>::encolar(const T & dato)
+void Cola<T>::encolar(const T & dato)
 {
     lista_.agregar(dato);
     tam_++;
 }
 
 template<typename T>
-T cola<T>::desencolar()
+T Cola<T>::desencolar()
 {
     if(vacia())
         return T();
@@ -76,7 +75,7 @@ T cola<T>::desencolar()
 }
 
 template<typename T>
-T cola<T>::frente() const
+T Cola<T>::frente() const
 {
     if(vacia())
         return T();
@@ -85,13 +84,13 @@ T cola<T>::frente() const
 }
 
 template<typename T>
-bool cola<T>::vacia() const
+bool Cola<T>::vacia() const
 {
     return lista_.vacia();
 }
 
 template<typename T>
-const cola<T> & cola<T>::operator = (const cola &c)
+const Cola<T> & Cola<T>::operator = (const Cola &c)
 {
 	while(!this->vacia())
 		this->desencolar();

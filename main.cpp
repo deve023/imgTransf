@@ -2,11 +2,11 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "comando.h"
+#include "Comando.h"
 #include "Imagen.h"
-#include "pila.h"
-#include "cola.h"
-#include "token.h"
+#include "Pila.h"
+#include "Cola.h"
+#include "Token.h"
 
 using namespace std;
 
@@ -23,7 +23,7 @@ static option_t options[] = {
 	{0, },
 };
 
-static cola<token> function;
+static Cola<Token> function;
 static istream *iss = 0;
 static ostream *oss = 0;
 static fstream ifs;
@@ -33,13 +33,13 @@ static fstream ofs;
 // De haber un problema, como no estar balanceada la expresion, se devuelve una cola vacia.
 // pre: La cola pasada por argumento debe haber sido creada y no estar vacia.
 // post: Devuelve una cola de tokens lista para usarse y no vacia, si todo salio bien.
-cola<token> shunting_yard(cola<token> infix);
+Cola<Token> shunting_yard(Cola<Token> infix);
 
 // Recibe una cola de tokens y devuelve un booleano indicando si la transformacion que representa es valida.
 // La cola de tokens se considera no valida si contiene una funcion que el programa no soporte.
 // pre: la cola de tokens debe haber sido creada y no estar vacia.
 // post: Devuelve un booleano acorde.
-bool esValida(cola<token> c);
+bool esValida(Cola<Token> c);
 
 static void opt_input(string const &arg)
 {
@@ -88,7 +88,7 @@ static void opt_function(string const &arg)
 	else
 		f = arg;
 
-	cola<token> infix;
+	Cola<Token> infix;
 	infix = strtocola(f);
 
 	if(!esValida(infix))
@@ -115,7 +115,7 @@ static void opt_help(string const &arg)
 
 int main(int argc, char * const argv[])
 {
-	comando comando(options);
+	Comando comando(options);
 	comando.parse(argc, argv);
 
 	Imagen orig, dest;
@@ -135,14 +135,14 @@ int main(int argc, char * const argv[])
 	return 0;
 }
 
-cola<token> shunting_yard(cola<token> infix)
+Cola<Token> shunting_yard(Cola<Token> infix)
 {
-    cola<token> output;
-    pila<token> opPila;
+    Cola<Token> output;
+    Pila<Token> opPila;
 
     while(!infix.vacia())
     {
-        token t = infix.desencolar();
+        Token t = infix.desencolar();
         switch(t.getType())
         {
             case NUMBER:
@@ -180,29 +180,29 @@ cola<token> shunting_yard(cola<token> infix)
                 while(!opPila.vacia() && !(opPila.tope().getType() == LPAR))
                     output.encolar(opPila.pop());
                 if(opPila.vacia())
-                    return cola<token>(); // error: la expresion esta desbalanceada. Devuelve Cola() por defecto.
+                    return Cola<Token>(); // error: la expresion esta desbalanceada. Devuelve Cola() por defecto.
                 opPila.pop(); // Descarta el LPAR que esta en la pila
                 break;
             default:
-                return cola<token>(); // Si no es de ninguno de estos tipos, hubo un error. Devuelve Cola() por defecto.
+                return Cola<Token>(); // Si no es de ninguno de estos tipos, hubo un error. Devuelve Cola() por defecto.
         }
     }
 
     while(!opPila.vacia())
     {
     	if(opPila.tope().getType() == LPAR)
-    		return cola<token>();
+    		return Cola<Token>();
         output.encolar(opPila.pop());
     }
 
     return output;
 }
 
-bool esValida(cola<token> c)
+bool esValida(Cola<Token> c)
 {
 	while(!c.vacia())
 	{
-		token t = c.desencolar();
+		Token t = c.desencolar();
 		
 		if(t.getType() != FUNCTION)
 			continue;

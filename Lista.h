@@ -7,52 +7,52 @@
 //LISTA DOBLEMENTE ENLAZADA
 
 template<typename T>
-class lista
+class Lista
 {	
     private:
     
-        class nodo
+        class Nodo
     	{
-    		friend class lista;
+    		friend class Lista;
     
-    		nodo *sig_;
-    		nodo *ant_;
+    		Nodo *sig_;
+    		Nodo *ant_;
     		T dato_;
     
     	public:
-    		nodo(T const&);
-    		~nodo();
+    		Nodo(T const&);
+    		~Nodo();
     	};
     
-    	nodo *pri_;
-    	nodo *ult_;
+    	Nodo *pri_;
+    	Nodo *ult_;
     	size_t tam_;
     
     public:
     
-        class iterador
+        class Iterador
         {
-                friend class lista;
+                friend class Lista;
                 
-                nodo* actual_;
-                iterador(nodo*);
+                Nodo* actual_;
+                Iterador(Nodo*);
             
             public:
-                iterador();
-                iterador(const iterador &);
-                iterador(const lista &);
-                ~iterador();
+                Iterador();
+                Iterador(const Iterador &);
+                Iterador(const Lista &);
+                ~Iterador();
                 
                 T& dato();
                 const T& dato() const;
-                iterador& avanzar();
-                iterador& retroceder();
+                Iterador& avanzar();
+                Iterador& retroceder();
                 bool extremo() const;
         };
     
-    	lista();
-    	lista(const lista &);
-    	~lista();
+    	Lista();
+    	Lista(const Lista &);
+    	~Lista();
     
     	size_t tamano() const;
     	bool vacia() const;
@@ -74,49 +74,49 @@ class lista
         
 
 
-        const lista<T> & operator = (const lista<T> &);
+        const Lista<T> & operator = (const Lista<T> &);
     
 };
 
 template<typename T>
-lista<T>::iterador::iterador() : actual_(0)
+Lista<T>::Iterador::Iterador() : actual_(0)
 {
 }
 
 template<typename T>
-lista<T>::iterador::iterador(nodo* actual) : actual_(actual)
+Lista<T>::Iterador::Iterador(Nodo* actual) : actual_(actual)
 {
 }
 
 template<typename T>
-lista<T>::iterador::iterador(const iterador & it) : actual_(it.actual_)
+Lista<T>::Iterador::Iterador(const Iterador & it) : actual_(it.actual_)
 {
 }
 
 template<typename T>
-lista<T>::iterador::iterador(const lista & l) : actual_(l.pri_)
+Lista<T>::Iterador::Iterador(const Lista & l) : actual_(l.pri_)
 {
 }
 
 template<typename T>
-lista<T>::iterador::~iterador()
+Lista<T>::Iterador::~Iterador()
 {
 }
 
 template<typename T>
-T& lista<T>::iterador::dato()
-{
-    return actual_->dato_;
-}
-
-template<typename T>
-const T& lista<T>::iterador::dato() const
+T& Lista<T>::Iterador::dato()
 {
     return actual_->dato_;
 }
 
 template<typename T>
-typename lista<T>::iterador& lista<T>::iterador::avanzar()
+const T& Lista<T>::Iterador::dato() const
+{
+    return actual_->dato_;
+}
+
+template<typename T>
+typename Lista<T>::Iterador& Lista<T>::Iterador::avanzar()
 {
     if(actual_)
         actual_ = actual_->sig_;
@@ -125,7 +125,7 @@ typename lista<T>::iterador& lista<T>::iterador::avanzar()
 }
 
 template<typename T>
-typename lista<T>::iterador& lista<T>::iterador::retroceder()
+typename Lista<T>::Iterador& Lista<T>::Iterador::retroceder()
 {
     if(actual_)
         actual_ = actual_->ant_;
@@ -134,35 +134,35 @@ typename lista<T>::iterador& lista<T>::iterador::retroceder()
 }
 
 template<typename T>
-bool lista<T>::iterador::extremo() const
+bool Lista<T>::Iterador::extremo() const
 {
     return actual_ == 0;
 }
 
 template<typename T>
-lista<T>::nodo::nodo(const T &t) : sig_(0), ant_(0), dato_(t)
+Lista<T>::Nodo::Nodo(const T &t) : sig_(0), ant_(0), dato_(t)
 {
 }
 
 template<typename T>
-lista<T>::nodo::~nodo()
+Lista<T>::Nodo::~Nodo()
 {
 }
 
 template<typename T>
-lista<T>::lista() : pri_(0), ult_(0), tam_(0)
+Lista<T>::Lista() : pri_(0), ult_(0), tam_(0)
 {
 }
 
 template<typename T>
-lista<T>::lista(const lista &orig) : pri_(0), ult_(0), tam_(orig.tam_)
+Lista<T>::Lista(const Lista &orig) : pri_(0), ult_(0), tam_(orig.tam_)
 {
-	nodo* iter = orig.pri_;
-	nodo* ant = 0;
+	Nodo* iter = orig.pri_;
+	Nodo* ant = 0;
 
 	while(iter)
 	{
-		nodo* nuevo = new nodo(iter->dato_);
+		Nodo* nuevo = new Nodo(iter->dato_);
 		nuevo->ant_ = ant;
 		nuevo->sig_ = 0;
 		if (ant != 0)
@@ -176,32 +176,32 @@ lista<T>::lista(const lista &orig) : pri_(0), ult_(0), tam_(orig.tam_)
 }
 
 template<typename T>
-lista<T>::~lista()
+Lista<T>::~Lista()
 {
-	for (nodo* p = pri_; p; )
+	for (Nodo* p = pri_; p; )
 	{
-		nodo* q = p->sig_;
+		Nodo* q = p->sig_;
 		delete p;
 		p = q;
 	}
 }
 
 template<typename T>
-size_t lista<T>::tamano() const
+size_t Lista<T>::tamano() const
 {
 	return tam_;
 }
 
 template<typename T>
-bool lista<T>::vacia() const
+bool Lista<T>::vacia() const
 {
     return pri_ == 0;
 }
 
 template<typename T>
-bool lista<T>::contiene(const T & elem) const
+bool Lista<T>::contiene(const T & elem) const
 {
-    nodo* iter = pri_;
+    Nodo* iter = pri_;
     while(iter)
     {
         if(iter->dato_ == elem)
@@ -214,9 +214,9 @@ bool lista<T>::contiene(const T & elem) const
 }
 
 template<typename T>
-void lista<T>::insertar(const T & elem)
+void Lista<T>::insertar(const T & elem)
 {
-    nodo* nuevo = new nodo(elem);
+    Nodo* nuevo = new Nodo(elem);
     nuevo->sig_ = pri_;
     
     if(pri_)
@@ -231,13 +231,13 @@ void lista<T>::insertar(const T & elem)
 }
 
 template<typename T>
-void lista<T>::agregar(const T & elem)
+void Lista<T>::agregar(const T & elem)
 {
     if(pri_ == 0)
         insertar(elem);
     else
     {
-        nodo* nuevo = new nodo(elem);
+        Nodo* nuevo = new Nodo(elem);
         nuevo->ant_ = ult_;
         ult_->sig_ = nuevo;
         ult_ = nuevo;
@@ -247,15 +247,15 @@ void lista<T>::agregar(const T & elem)
 }
 
 template<typename T>
-T& lista<T>::primero() const
+T& Lista<T>::primero() const
 {
     return pri_->dato_;
 }
 
 template<typename T>
-void lista<T>::borrar(size_t i)
+void Lista<T>::borrar(size_t i)
 {
-    nodo* iter = pri_;
+    Nodo* iter = pri_;
     size_t pos = 0;
     while(iter!=0 && pos<i)
     {
@@ -265,8 +265,8 @@ void lista<T>::borrar(size_t i)
     
     if(iter!=0)
     {
-        nodo* anterior = iter->ant_;
-        nodo* siguiente = iter->sig_;
+        Nodo* anterior = iter->ant_;
+        Nodo* siguiente = iter->sig_;
         delete iter;
         if(siguiente==0 && anterior ==0)
         {
@@ -291,12 +291,12 @@ void lista<T>::borrar(size_t i)
 }
 
 template<typename T>
-const lista<T> & lista<T>::operator = (const lista<T> &orig)
+const Lista<T> & Lista<T>::operator = (const Lista<T> &orig)
 {
     // Primero se vacia la lista;
-    for (nodo* p = pri_; p; )
+    for (Nodo* p = pri_; p; )
     {
-        nodo* q = p->sig_;
+        Nodo* q = p->sig_;
         delete p;
         p = q;
     }
@@ -305,12 +305,12 @@ const lista<T> & lista<T>::operator = (const lista<T> &orig)
     ult_ = 0;
     tam_ = orig.tam_;
 
-    nodo* iter = orig.pri_;
-    nodo* ant = 0;
+    Nodo* iter = orig.pri_;
+    Nodo* ant = 0;
 
     while(iter)
     {
-        nodo* nuevo = new nodo(iter->dato_);
+        Nodo* nuevo = new Nodo(iter->dato_);
         nuevo->ant_ = ant;
         nuevo->sig_ = 0;
         if (ant != 0)

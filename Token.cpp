@@ -1,30 +1,30 @@
-#include "token.h"
-#include "cola.h"
-#include "pila.h"
+#include "Token.h"
+#include "Cola.h"
+#include "Pila.h"
 
 #include <iostream>
 
 
-token::token() : type_(NONE), value_(""), complejo_(Complejo()), precedence_(0), l_assoc_(false)
+Token::Token() : type_(NONE), value_(""), complejo_(Complejo()), precedence_(0), l_assoc_(false)
 {
 }
 
-token::token(token_type_t type, string value, Complejo c) :
+Token::Token(token_type_t type, string value, Complejo c) :
 	type_(type), value_(value), complejo_(c), precedence_(0), l_assoc_(false)
 {	
 }
 
-token::token(token_type_t type, string value) :
+Token::Token(token_type_t type, string value) :
 	type_(type), value_(value), complejo_(Complejo()), precedence_(5), l_assoc_(false)
 {
 }
 
-token::token(token_type_t type, string value, int precedence, bool is_l_assoc) : 
+Token::Token(token_type_t type, string value, int precedence, bool is_l_assoc) : 
 	type_(type), value_(value), precedence_(precedence), l_assoc_(is_l_assoc)
 {
 }
 
-token::token(token_type_t type)
+Token::Token(token_type_t type)
 {
 	
 	this->type_ = type;
@@ -54,75 +54,75 @@ token::token(token_type_t type)
 
 }
 
-token_type_t token::getType() const
+token_type_t Token::getType() const
 {
 	return this->type_;
 }
 
-string token::getValue() const
+string Token::getValue() const
 {
 	return this->value_;
 }
-
-bool token::is_function() const
+/*
+bool Token::is_function() const
 {
 	return this->type_ == FUNCTION;
 }
 
-bool token::is_lpar() const
+bool Token::is_lpar() const
 {
 	return this->type_ == LPAR;
 }
 
-bool token::is_rpar() const
+bool Token::is_rpar() const
 {
 	return this->type_ == RPAR;
 }
 
-bool token::is_operator() const
+bool Token::is_operator() const
 {
 	return this->type_ == OPERATOR;
 }
 
-bool token::is_number() const
+bool Token::is_number() const
 {
 	return this->type_ == NUMBER;
 }
 
-bool token::is_j() const
+bool Token::is_j() const
 {
 	return this->type_ == J; 
 }
 
-bool token::is_z() const
+bool Token::is_z() const
 {
 	return this->type_ == Z;
 }
-
-bool token::is_l_assoc() const
+*/
+bool Token::is_l_assoc() const
 {
 	return l_assoc_;
 }
 
-int token::getPrecedence() const
+int Token::getPrecedence() const
 {
 	return this->precedence_;
 }
 
-Complejo token::getComplex() const
+Complejo Token::getComplex() const
 {
 	return this->complejo_;
 }
 
-ostream & operator<<(ostream &os, const token &t)
+ostream & operator<<(ostream &os, const Token &t)
 {
 	//return os << t.type_ << '(' << t.value_ << ')'; //imprime "tipo(valor)"
 	return os << t.value_; //imprime solo el valor
 }
 
-cola<token> strtocola(string str)
+Cola<Token> strtocola(string str)
 {
-    cola<token> output;
+    Cola<Token> output;
     string buffer;
 	
     for(size_t i = 0; i <= str.length(); i++)
@@ -132,25 +132,25 @@ cola<token> strtocola(string str)
 		
 		if(str[i] == '-' && (i==0 || str[i-1]=='('))
 		{
-			output.encolar(token(NUMBER, "-1", Complejo(-1,0)));
-			output.encolar(token(OPERATOR,"*",3,true));
+			output.encolar(Token(NUMBER, "-1", Complejo(-1,0)));
+			output.encolar(Token(OPERATOR,"*",3,true));
 			continue;
 		}
 		
         if(!buffer.empty() && isalpha(buffer[0]) && !isalnum(str[i]))
         {
             if(buffer[0] == 'j' && buffer.length() == 1)
-                output.encolar(token(J));
+                output.encolar(Token(J));
             else if(buffer[0] == 'z' && buffer.length() == 1)
-                output.encolar(token(Z));
+                output.encolar(Token(Z));
             else
-                output.encolar(token(FUNCTION, buffer));
+                output.encolar(Token(FUNCTION, buffer));
             buffer.clear();
         }
 
         if(!buffer.empty() && isdigit(buffer[0]) && !isdigit(str[i]) && str[i] != '.')
         {
-            output.encolar(token(NUMBER, buffer, Complejo(stof(buffer), 0)));
+            output.encolar(Token(NUMBER, buffer, Complejo(stof(buffer), 0)));
             buffer.clear();
         }
 
@@ -163,21 +163,21 @@ cola<token> strtocola(string str)
         switch(str[i])
         {
             case '(':
-                output.encolar(token(LPAR));
+                output.encolar(Token(LPAR));
                 break;
             case ')':
-                output.encolar(token(RPAR));
+                output.encolar(Token(RPAR));
                 break;
             case '+':
             case '-':
-                output.encolar(token(OPERATOR, string(1, str[i]), 2, true));
+                output.encolar(Token(OPERATOR, string(1, str[i]), 2, true));
                 break;
             case '*':
             case '/':
-                output.encolar(token(OPERATOR, string(1, str[i]), 3, true));
+                output.encolar(Token(OPERATOR, string(1, str[i]), 3, true));
                 break;
             case '^':
-                output.encolar(token(OPERATOR, string(1, str[i]), 4, false));
+                output.encolar(Token(OPERATOR, string(1, str[i]), 4, false));
                 break;
         }
     }
@@ -186,13 +186,13 @@ cola<token> strtocola(string str)
 }
 
 
-Complejo transformar(cola<token> rpn, Complejo const & z)
+Complejo transformar(Cola<Token> rpn, Complejo const & z)
 {
-	pila<Complejo> resultado;
+	Pila<Complejo> resultado;
     
 	while(!rpn.vacia())
 	{
-		token actual = rpn.desencolar();
+		Token actual = rpn.desencolar();
 		
 		if(actual.getType() == NUMBER || actual.getType() == J)
 		{

@@ -2,19 +2,19 @@
 #define _PILA_H_
 
 
-#include "lista.h"
+#include "Lista.h"
 
 template<typename T>
-class pila
+class Pila
 {
     private:
-        lista<T> lista_;
+        Lista<T> lista_;
         size_t tam_;
     
     public:
-        pila();
-        pila(const pila &);
-        ~pila();
+        Pila();
+        Pila(const Pila &);
+        ~Pila();
         
         // Realiza el alta en la pila de un elemento pasado por argumento.
         // pre: la pila debe haber sido creada.
@@ -40,17 +40,17 @@ class pila
 
 
 template<typename T>
-pila<T>::pila() : lista_(), tam_(0) 
+Pila<T>::Pila() : lista_(), tam_(0) 
 {
 }
 
 template<typename T>
-pila<T>::pila(const pila & p) : lista_(p.lista_), tam_(p.tam_) 
+Pila<T>::Pila(const Pila & p) : lista_(p.lista_), tam_(p.tam_) 
 {
 }
 
 template<typename T>
-pila<T>::~pila()
+Pila<T>::~Pila()
 {
 }
 
@@ -59,14 +59,14 @@ pila<T>::~pila()
 
 
 template<typename T>
-void pila<T>::push(const T & dato)
+void Pila<T>::push(const T & dato)
 {
     lista_.insertar(dato);
     tam_++;
 }
 
 template<typename T>
-T pila<T>::pop()
+T Pila<T>::pop()
 {
     if(vacia())
         return T();
@@ -77,7 +77,7 @@ T pila<T>::pop()
 }
 
 template<typename T>
-T pila<T>::tope() const
+T Pila<T>::tope() const
 {
     if(vacia())
         return T();
@@ -86,7 +86,7 @@ T pila<T>::tope() const
 
 
 template<typename T>
-bool pila<T>::vacia() const
+bool Pila<T>::vacia() const
 {
     return lista_.vacia();
 }

@@ -3,8 +3,8 @@
 #include "Pixel.h"
 #include "Matriz.h"
 #include "Complejo.h"
-#include "token.h"
-#include "cola.h"
+#include "Token.h"
+#include "Cola.h"
 
 #include <iostream>
 #include <sstream>
@@ -210,7 +210,7 @@ void Imagen::escribirArchivoPgm(ostream *oss) const
 }
 
 
-Imagen Imagen::transformarImagen(cola<token> & rpn) const
+Imagen Imagen::transformarImagen(Cola<Token> & rpn) const
 {
 	Imagen dest;
 

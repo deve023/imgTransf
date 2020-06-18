@@ -108,6 +108,7 @@ static void opt_function(string const &arg)
 	if(!esValida(infix))
 	{
 		cerr << "La funcion no es valida." << endl;
+		infix.~Cola();
 		exit(1);
 	}
 
@@ -115,6 +116,7 @@ static void opt_function(string const &arg)
 	if(function.vacia())
 	{
 		cerr << "La funcion no es valida." << endl;
+		infix.~Cola();
 		exit(1);
 	}
 }

@@ -63,42 +63,7 @@ string Token::getValue() const
 {
 	return this->value_;
 }
-/*
-bool Token::is_function() const
-{
-	return this->type_ == FUNCTION;
-}
 
-bool Token::is_lpar() const
-{
-	return this->type_ == LPAR;
-}
-
-bool Token::is_rpar() const
-{
-	return this->type_ == RPAR;
-}
-
-bool Token::is_operator() const
-{
-	return this->type_ == OPERATOR;
-}
-
-bool Token::is_number() const
-{
-	return this->type_ == NUMBER;
-}
-
-bool Token::is_j() const
-{
-	return this->type_ == J; 
-}
-
-bool Token::is_z() const
-{
-	return this->type_ == Z;
-}
-*/
 bool Token::is_l_assoc() const
 {
 	return l_assoc_;

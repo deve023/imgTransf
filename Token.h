@@ -33,14 +33,6 @@ class Token
         string getValue() const;
 		int getPrecedence() const;
 		Complejo getComplex() const;
-/*
-		bool is_function() const;
-		bool is_lpar() const;
-		bool is_rpar() const;
-		bool is_operator() const;
-		bool is_number() const;
-		bool is_j() const;
-		bool is_z() const;*/
 		bool is_l_assoc() const;
 		
 		friend ostream & operator<<(ostream &, const Token &);

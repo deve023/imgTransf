@@ -36,9 +36,23 @@ static fstream ofs;
 Cola<Token> shunting_yard(Cola<Token> infix);
 
 // Recibe una cola de tokens y devuelve un booleano indicando si la transformacion que representa es valida.
-// La cola de tokens se considera no valida si contiene una funcion que el programa no soporte.
+// La cola de tokens se considera no valida si:
+//		Contiene una funcion que el programa no soporte.
+//		Comienza con OPERATOR o RPAR.
+//		Finaliza con OPERATOR, FUNCTION o LPAR.
+//		Contiene secuencias como:
+//				OPERATOR-OPERATOR
+//				OPERATOR-RPAR
+//				LPAR-RPAR
+//				LPAR-OPERATOR
+//				RPAR-(NO OPERTATOR)
+//				RPAR-(NO RPAR)
+//				FUNCTION-(NO LPAR)
+//				NUMBER-(NO OPERATOR)
+//				Z-(NO OPERATOR)
+//				J-(NO OPERATOR)
 // pre: la cola de tokens debe haber sido creada y no estar vacia.
-// post: Devuelve un booleano acorde.
+// post: -
 bool esValida(Cola<Token> c);
 
 static void opt_input(string const &arg)

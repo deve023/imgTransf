@@ -1,10 +1,10 @@
 
 #include "Imagen.h"
 #include "Pixel.h"
-#include "Matriz.h"
-#include "Complejo.h"
-#include "Token.h"
-#include "Cola.h"
+#include "../Estructuras/Matriz.h"
+#include "../Complejo/Complejo.h"
+#include "../Token/Token.h"
+#include "../Estructuras/Cola.h"
 
 #include <iostream>
 #include <sstream>

@@ -1,6 +1,6 @@
 #include "Pixel.h"
 
-#include "Complejo.h"
+#include "../Complejo/Complejo.h"
 
 Pixel::Pixel():intensidad(0),pos(Complejo(0,0))
 {}

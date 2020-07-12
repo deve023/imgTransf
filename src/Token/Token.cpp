@@ -1,6 +1,6 @@
 #include "Token.h"
-#include "Cola.h"
-#include "Pila.h"
+#include "../Estructuras/Cola.h"
+#include "../Estructuras/Pila.h"
 
 #include <iostream>
 

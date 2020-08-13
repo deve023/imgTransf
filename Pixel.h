@@ -1,7 +1,7 @@
 #ifndef _PIXEL_H_INCLUDED_
 #define _PIXEL_H_INCLUDED_
 
-#include "../Complejo/Complejo.h"
+#include "Complejo.h"
 
 class Pixel
 {

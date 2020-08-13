@@ -5,11 +5,11 @@
 #define NULL 0
 #endif
 
-#include "../Complejo/Complejo.h"
+#include "Complejo.h"
 #include "Pixel.h"
-#include "../Estructuras/Matriz.h"
-#include "../Estructuras/Cola.h"
-#include "../Token/Token.h"
+#include "Matriz.h"
+#include "Cola.h"
+#include "Token.h"
 
 #include <iostream>
 

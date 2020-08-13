@@ -1,28 +1,27 @@
 CXX = g++
 CXXFLAGS = -Wall -pedantic -g
 
-all: imgTransf
+all: tp1
+Token.o: Token.cpp Token.h Complejo.h Lista.h Cola.h Pila.h
+	$(CXX) $(CXXFLAGS) -c Token.cpp
 
-Token.o: ./src/Token/Token.cpp ./src/Token/Token.h ./src/Complejo/Complejo.h ./src/Estructuras/Lista.h ./src/Estructuras/Cola.h ./src/Estructuras/Pila.h
-	$(CXX) $(CXXFLAGS) -c ./src/Token/Token.cpp
+Complejo.o: Complejo.cpp Complejo.h Cola.h
+	$(CXX) $(CXXFLAGS) -c Complejo.cpp
 
-Complejo.o: ./src/Complejo/Complejo.cpp ./src/Complejo/Complejo.h ./src/Estructuras/Cola.h
-	$(CXX) $(CXXFLAGS) -c ./src/Complejo/Complejo.cpp
+Pixel.o: Pixel.cpp Pixel.h Complejo.h
+	$(CXX) $(CXXFLAGS) -c Pixel.cpp
 
-Pixel.o: ./src/Imagen/Pixel.cpp ./src/Imagen/Pixel.h ./src/Complejo/Complejo.h
-	$(CXX) $(CXXFLAGS) -c ./src/Imagen/Pixel.cpp
+Imagen.o: Imagen.cpp Imagen.h Pixel.h Complejo.h Cola.h Token.h
+	$(CXX) $(CXXFLAGS) -c Imagen.cpp
 
-Imagen.o: ./src/Imagen/Imagen.cpp ./src/Imagen/Imagen.h ./src/Imagen/Pixel.h ./src/Complejo/Complejo.h ./src/Estructuras/Cola.h ./src/Token/Token.h
-	$(CXX) $(CXXFLAGS) -c ./src/Imagen/Imagen.cpp
+Comando.o: Comando.cpp Comando.h
+	$(CXX) $(CXXFLAGS) -c Comando.cpp
 
-Comando.o: ./src/Comando/Comando.cpp ./src/Comando/Comando.h
-	$(CXX) $(CXXFLAGS) -c ./src/Comando/Comando.cpp
+main.o: main.cpp Imagen.h Comando.h Pila.h Cola.h Token.h
+	$(CXX) $(CXXFLAGS) -c main.cpp
 
-main.o: ./src/main.cpp ./src/Imagen/Imagen.h ./src/Comando/Comando.h ./src/Estructuras/Pila.h ./src/Estructuras/Cola.h ./src/Token/Token.h
-	$(CXX) $(CXXFLAGS) -c ./src/main.cpp
-
-imgTransf: main.o Pixel.o Imagen.o Complejo.o Comando.o Token.o 
-	$(CXX) $(CXXFLAGS) $^ -o imgTransf; \
+tp1: main.o Pixel.o Imagen.o Complejo.o Comando.o Token.o 
+	$(CXX) $(CXXFLAGS) $^ -o tp1; \
 	rm *.o
 
 clean:

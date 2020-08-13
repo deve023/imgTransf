@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "../Estructuras/Cola.h"
+#include "Cola.h"
 
 class Complejo
 {

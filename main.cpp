@@ -2,11 +2,11 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "./Comando/Comando.h"
-#include "./Imagen/Imagen.h"
-#include "./Estructuras/Pila.h"
-#include "./Estructuras/Cola.h"
-#include "./Token/Token.h"
+#include "Comando.h"
+#include "Imagen.h"
+#include "Pila.h"
+#include "Cola.h"
+#include "Token.h"
 
 using namespace std;
 

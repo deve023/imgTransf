@@ -1,10 +1,10 @@
 #ifndef _TOKEN_H_
 #define _TOKEN_H_
 
-#include "Lista.h"
-#include "Complejo.h"
-#include "Cola.h"
-#include "Pila.h"
+#include "../Complejo/Complejo.h"
+#include "../Estructuras/Lista.h"
+#include "../Estructuras/Cola.h"
+#include "../Estructuras/Pila.h"
 
 #include <string>
 #include <iostream>

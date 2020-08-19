@@ -293,6 +293,9 @@ void Lista<T>::borrar(size_t i)
 template<typename T>
 const Lista<T> & Lista<T>::operator = (const Lista<T> &orig)
 {
+	if(this == &orig)
+		return *this;
+	
     // Primero se vacia la lista;
     for (Nodo* p = pri_; p; )
     {

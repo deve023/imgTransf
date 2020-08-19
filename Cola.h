@@ -92,6 +92,9 @@ bool Cola<T>::vacia() const
 template<typename T>
 const Cola<T> & Cola<T>::operator = (const Cola &c)
 {
+	if(this == &c)
+		return *this;
+	
 	while(!this->vacia())
 		this->desencolar();
 

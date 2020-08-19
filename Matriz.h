@@ -109,6 +109,9 @@ void Matriz<T>::setMatrizNULL()
 template <typename T>
 const Matriz<T> & Matriz<T>::operator = (const Matriz &m)
 {
+	if(this == &m)
+		return *this;
+
 	this->setMatrizNULL();
 
 	if(m.esVacia())
